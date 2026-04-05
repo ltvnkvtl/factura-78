@@ -1,10 +1,27 @@
 ---
 const { brandName, city, scheduleText } = Astro.props;
 ---
-<footer class="section">
-  <div class="container card" style="display:grid;gap:0.75rem;">
-    <strong>{brandName}</strong><span>{city}</span>
-    <span>Сайт услуг без лишнего шума: ремонт, чистка, реставрация, доставка по городу.</span>
-    <span>{scheduleText.join(' · ')}</span>
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <strong>{brandName}</strong>
+      <p>
+        Чистка, ремонт и восстановление сумок, обуви и кроссовок с понятным сценарием обращения и
+        реальными работами до / после.
+      </p>
+    </div>
+
+    <div class="site-footer__links">
+      <a href="/#services">Услуги</a>
+      <a href="/raboty/">Работы</a>
+      <a href="/ceny-i-sroki/">Цены и сроки</a>
+      <a href="/zabor-i-dostavka/">Доставка</a>
+      <a href="/kontakty/">Контакты</a>
+    </div>
+
+    <div class="site-footer__meta">
+      <span>{city}</span>
+      <span>{scheduleText.join(' · ')}</span>
+    </div>
   </div>
 </footer>

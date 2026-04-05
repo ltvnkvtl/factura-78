@@ -1,0 +1,21 @@
+---
+import type { ShowcaseItem } from '../data/portfolio';
+
+interface Props {
+  item: ShowcaseItem;
+  compact?: boolean;
+}
+
+const { item, compact = false } = Astro.props as Props;
+---
+<article class:list={['showcase-card', compact && 'showcase-card--compact']}>
+  <figure class="showcase-card__media">
+    <img src={item.src} alt={item.alt} loading="lazy" />
+  </figure>
+  <div class="showcase-card__body">
+    <span class="showcase-card__eyebrow">{item.category}</span>
+    <h3>{item.title}</h3>
+    <p>{item.description}</p>
+    {item.accent && <span class="showcase-card__accent">{item.accent}</span>}
+  </div>
+</article>

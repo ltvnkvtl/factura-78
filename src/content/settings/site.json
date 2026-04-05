@@ -2,7 +2,7 @@
   "brandName": "Faktura / 78",
   "siteUrl": "https://factura78.ru",
   "city": "Санкт-Петербург",
-  "defaultTheme": "dark",
+  "defaultTheme": "light",
   "primaryCtaLabel": "Отправить фото",
   "secondaryCtaLabel": "Посмотреть цены",
   "scheduleText": ["Пн-Сб: 11:00-20:00", "Вс: по договоренности"]

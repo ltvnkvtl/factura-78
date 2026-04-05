@@ -1,9 +1,57 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CaseCard from '../../components/CaseCard.astro';
+import ShowcaseCard from '../../components/ShowcaseCard.astro';
+import { showcaseGallery } from '../../data/portfolio';
 import { getOrderedCases } from '../../lib/content';
+
 const cases = await getOrderedCases();
 ---
 <BaseLayout title="Работы / До-после | Faktura / 78" description="Реальные кейсы до и после" pathname="/raboty/">
-  <section class="section"><div class="container"><h1>Работы / До-после</h1><div class="grid">{cases.map((item) => <CaseCard item={item} />)}</div></div></section>
+  <section class="works-hero">
+    <div class="container works-hero__grid">
+      <div class="section-heading">
+        <span class="section-kicker">Работы / До-после</span>
+        <h1 class="section-title">Отдельная страница с сильной визуальной галереей</h1>
+        <p class="section-lead">
+          Здесь собраны реальные кейсы по обуви, кроссовкам и сумкам. На главной я показываю
+          только часть, а на этой странице вынес полную подборку в более спокойном формате.
+        </p>
+      </div>
+
+      <div class="metric-row">
+        <span class="metric-pill">Реальные изделия</span>
+        <span class="metric-pill">Чистка, ремонт, восстановление</span>
+        <span class="metric-pill">Фото без стоков</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="showcase-grid">
+        {showcaseGallery.map((item) => <ShowcaseCard item={item} compact />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section works-notes">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-kicker">Текстовые кейсы</span>
+        <h2 class="section-title">Короткие пояснения по типовым обращениям</h2>
+      </div>
+
+      <div class="story-grid">
+        {cases.map((item) => (
+          <article class="story-card">
+            <h3>{item.data.title}</h3>
+            <p>{item.data.excerpt}</p>
+            <ul>
+              {item.data.result.map((point) => <li>{point}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>

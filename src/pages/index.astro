@@ -1,18 +1,272 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import CaseCard from '../components/CaseCard.astro';
-import { getOrderedCases, getOrderedServices, getPrimaryCtaHref, getSitePage, getSiteSettings } from '../lib/content';
+import ShowcaseCard from '../components/ShowcaseCard.astro';
+import {
+  deliveryVisual,
+  heroCollage,
+  recentStrip,
+  serviceVisualsBySlug,
+  showcaseGallery,
+} from '../data/portfolio';
+import {
+  getOrderedFaq,
+  getOrderedServices,
+  getPrimaryCtaHref,
+  getSitePage,
+  getSiteSettings,
+} from '../lib/content';
 
 const settings = await getSiteSettings();
 const page = await getSitePage('home');
 const services = await getOrderedServices();
-const cases = await getOrderedCases();
+const faq = await getOrderedFaq();
 const primaryHref = getPrimaryCtaHref(settings);
+
+const landingServiceSlugs = [
+  'chistka-i-vosstanovlenie-krossovok-spb',
+  'remont-obuvi-spb',
+  'remont-sumok-spb',
+  'pokraska-i-vosstanovlenie-kozhi-spb',
+];
+
+const landingServices = landingServiceSlugs
+  .map((slug) => services.find((item) => item.data.slug === slug))
+  .filter((item): item is (typeof services)[number] => item !== undefined);
+
+const heroMetrics = [
+  'Ориентир по цене можно получить по фото в день обращения.',
+  'Работаем и с обувью, и с сумками без разделения на «простое» и «сложное».',
+  'Забор и доставка по Санкт-Петербургу согласуются без лишних звонков.',
+];
+
+const processSteps = [
+  'Присылаете фото в мессенджер или оставляете заявку на сайте.',
+  'Получаете ориентир по цене, срокам и подходящему формату передачи вещи.',
+  'Согласовываете мастерскую или забор и получаете вещь обратно в понятом состоянии.',
+];
+
+const featuredWork = showcaseGallery[8];
 ---
 <BaseLayout title={page.data.seoTitle} description={page.data.seoDescription} pathname="/">
-  <Hero eyebrow="Санкт-Петербург" title={page.data.heroTitle} lead={page.data.heroLead} primaryHref={primaryHref} primaryLabel={settings.primaryCtaLabel} secondaryHref="/ceny-i-sroki/" secondaryLabel={settings.secondaryCtaLabel} />
-  <section class="section"><div class="container"><h2>Популярные услуги</h2><div class="grid">{services.slice(0, 3).map((item) => <ServiceCard item={item} />)}</div></div></section>
-  <section class="section"><div class="container"><h2>Кейсы до/после</h2><div class="grid">{cases.map((item) => <CaseCard item={item} />)}</div></div></section>
+  <section class="landing-hero" id="top">
+    <div class="container landing-hero__panel">
+      <div class="landing-hero__grid">
+        <div class="landing-hero__content">
+          <span class="section-kicker section-kicker--light">Санкт-Петербург · обувь · сумки · кроссовки</span>
+          <h1 class="section-title landing-hero__title">
+            {page.data.heroTitle}
+            <span>с реальными до / после</span>
+          </h1>
+          <p class="landing-hero__lead">{page.data.heroLead}</p>
+
+          <div class="landing-hero__actions">
+            <a class="button button-primary" href={primaryHref}>{settings.primaryCtaLabel}</a>
+            <a class="button button-secondary" href="/raboty/">Смотреть работы</a>
+          </div>
+
+          <ul class="landing-hero__metrics">
+            {heroMetrics.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <div class="consult-box">
+            <p class="consult-box__title">Заказать консультацию</p>
+            <p class="consult-box__copy">
+              Отправьте фото и быстро поймете, что делать дальше: чистка, восстановление,
+              ремонт или просто локальная профилактика.
+            </p>
+            <div class="consult-box__actions">
+              <a class="button button-primary" href={primaryHref}>Отправить фото</a>
+              <a class="button button-secondary" href="/ceny-i-sroki/">Цены и сроки</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-collage" aria-label="Подборка реальных работ мастерской">
+          {heroCollage.map((item) => (
+            <figure class:list={['hero-collage__item', item.variant && `hero-collage__item--${item.variant}`]}>
+              <img src={item.src} alt={item.alt} />
+              <figcaption>{item.label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <div class="hero-ribbon">
+        <span>Чистка</span>
+        <span>Ремонт</span>
+        <span>Сумки</span>
+        <span>Кожа</span>
+        <span>Кроссовки</span>
+        <span>До / после</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section spotlight">
+    <div class="container spotlight__grid">
+      <div class="section-heading">
+        <span class="section-kicker">Самый наглядный кейс</span>
+        <h2 class="section-title">Когда результат видно без подписи</h2>
+        <p class="section-lead">
+          На сайте нужны не обещания, а работы, по которым сразу читается уровень аккуратности.
+          Поэтому в первом экране мы вывели реальные изображения, а не декоративные мокапы.
+        </p>
+        <div class="metric-row">
+          <span class="metric-pill">Фото реальных вещей</span>
+          <span class="metric-pill">Без стоков</span>
+          <span class="metric-pill">Честный визуальный результат</span>
+        </div>
+      </div>
+
+      <article class="spotlight-card">
+        <div class="spotlight-card__meta">
+          <span>{featuredWork.category}</span>
+          <strong>{featuredWork.title}</strong>
+        </div>
+        <img src={featuredWork.src} alt={featuredWork.alt} />
+        <p>{featuredWork.description}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-kicker">Услуги</span>
+        <h2 class="section-title">Четкая структура как у референса, но уже на вашем контенте</h2>
+        <p class="section-lead">
+          Вместо универсальных блоков вывел самые продающие направления и сразу привязал к ним
+          ваши фото, чтобы страница читалась как рабочий лендинг, а не как шаблон.
+        </p>
+      </div>
+
+      <div class="service-grid">
+        {landingServices.map((item) => {
+          const visual = serviceVisualsBySlug[item.data.slug];
+          return (
+            <article class="service-panel">
+              <figure class="service-panel__media">
+                <img src={visual.src} alt={visual.alt} loading="lazy" />
+                <figcaption>{visual.label}</figcaption>
+              </figure>
+              <div class="service-panel__body">
+                <h3>{item.data.title}</h3>
+                <p>{item.data.excerpt}</p>
+                <div class="service-panel__meta">
+                  <span>{item.data.priceNote}</span>
+                  <span>{item.data.turnaround}</span>
+                </div>
+                <a class="button button-secondary" href={`/uslugi/${item.data.slug}/`}>Подробнее</a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section delivery-band" id="delivery">
+    <div class="container delivery-band__grid">
+      <figure class="delivery-band__visual">
+        <img src={deliveryVisual.src} alt={deliveryVisual.alt} loading="lazy" />
+      </figure>
+
+      <div class="delivery-band__content">
+        <span class="section-kicker">Забор и доставка</span>
+        <h2 class="section-title">Если неудобно приехать, передачу вещи можно согласовать по фото и адресу</h2>
+        <p class="section-lead">
+          Референс сильно давил на courier-блок, и здесь это тоже работает: отдельный заметный
+          раздел помогает снять одно из главных возражений еще до переписки.
+        </p>
+        <ol class="process-list">
+          {processSteps.map((item) => <li>{item}</li>)}
+        </ol>
+        <a class="button button-primary" href="/zabor-i-dostavka/">Как это работает</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section recent-band">
+    <div class="container">
+      <div class="section-heading section-heading--light">
+        <span class="section-kicker section-kicker--light">Недавние работы</span>
+        <h2 class="section-title section-title--light">Темный горизонтальный блок вместо фейковых отзывов</h2>
+        <p class="section-lead section-lead--light">
+          Здесь я не стал придумывать отзывы. Вместо этого поставил живую ленту последних
+          визуальных кейсов, чтобы сохранить ритм референса и не потерять честность контента.
+        </p>
+      </div>
+
+      <div class="recent-strip">
+        {recentStrip.map((item) => (
+          <figure class="recent-strip__item">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+            <figcaption>{item.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cases">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-kicker">Работы до / после</span>
+        <h2 class="section-title">Галерея стала главным доказательством на странице</h2>
+        <p class="section-lead">
+          В этот блок вынес чистые до/после на нейтральном фоне. Он хорошо продолжает механику
+          референса, но выглядит честнее и сильнее за счет ваших собственных кейсов.
+        </p>
+      </div>
+
+      <div class="showcase-grid">
+        {showcaseGallery.map((item) => <ShowcaseCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-band" id="faq">
+    <div class="container faq-shell">
+      <div class="section-heading">
+        <span class="section-kicker">FAQ</span>
+        <h2 class="section-title">Ключевые вопросы уже на главной</h2>
+      </div>
+
+      <div class="faq-shell__items">
+        {faq.slice(0, 6).map((item, index) => (
+          <details class="faq-item">
+            <summary>
+              <span>0{index + 1}</span>
+              <strong>{item.data.question}</strong>
+            </summary>
+            <p>{item.data.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-map" id="contacts">
+    <div class="container contact-map__surface">
+      <div class="contact-map__card">
+        <span class="section-kicker">Приходите к нам</span>
+        <h2 class="section-title">Главный следующий шаг теперь видно сразу</h2>
+        <p class="section-lead">
+          Отправьте фото, получите ориентир по работам и выберите удобный формат передачи вещи по
+          Санкт-Петербургу.
+        </p>
+
+        <div class="contact-lines">
+          <span>{settings.city}</span>
+          <span>{settings.scheduleText.join(' · ')}</span>
+          <span>Сумки, обувь, кроссовки, кожа, сезонный уход и локальный ремонт.</span>
+        </div>
+
+        <div class="contact-map__actions">
+          <a class="button button-primary" href={primaryHref}>{settings.primaryCtaLabel}</a>
+          <a class="button button-secondary" href="/kontakty/">Все контакты</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
