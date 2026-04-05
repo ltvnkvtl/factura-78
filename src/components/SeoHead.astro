@@ -8,4 +8,4 @@ const { title, description, canonical, schema = [] } = Astro.props;
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-{schema.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+{schema.length > 0 && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}

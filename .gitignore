@@ -1,4 +1,6 @@
 .DS_Store
 .idea/
 .superpowers/
-
+node_modules/
+.astro/
+dist/

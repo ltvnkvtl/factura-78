@@ -1,15 +1,20 @@
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { getCollection, getEntry } from 'astro:content';
+import { listFixtureIds, readJsonFixture } from '../helpers/content-fixtures';
 
 describe('base content model', () => {
   it('loads settings, required site pages and the root district entry', async () => {
-    const settings = await getEntry('settings', 'site');
-    const pages = await getCollection('sitePages');
-    const district = await getEntry('districts', 'saint-petersburg');
+    const settings = await readJsonFixture<{ brandName: string; city: string }>(
+      path.resolve('src/content/settings/site.json'),
+    );
+    const pages = await listFixtureIds(path.resolve('src/content/site-pages'), '.md');
+    const district = await readJsonFixture<{ slug: string }>(
+      path.resolve('src/content/districts/saint-petersburg.json'),
+    );
 
-    expect(settings?.data.brandName).toBe('Faktura / 78');
-    expect(settings?.data.city).toBe('Санкт-Петербург');
-    expect(pages.map((page) => page.id)).toEqual(expect.arrayContaining(['home', 'services', 'prices', 'delivery', 'contacts', 'faq']));
-    expect(district?.data.slug).toBe('saint-petersburg');
+    expect(settings.brandName).toBe('Faktura / 78');
+    expect(settings.city).toBe('Санкт-Петербург');
+    expect(pages).toEqual(expect.arrayContaining(['home', 'services', 'prices', 'delivery', 'contacts', 'faq']));
+    expect(district.slug).toBe('saint-petersburg');
   });
 });

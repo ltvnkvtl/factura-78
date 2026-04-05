@@ -1,5 +1,11 @@
 ---
-const { item } = Astro.props;
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  item: CollectionEntry<'cases'>;
+}
+
+const { item } = Astro.props as Props;
 ---
 <article class="card">
   <h2 style="margin-top:0;">{item.data.title}</h2>

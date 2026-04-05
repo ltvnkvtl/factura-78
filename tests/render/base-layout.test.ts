@@ -1,5 +1,22 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+
+vi.mock('../../src/lib/content', () => ({
+  getPrimaryCtaHref: () => 'https://t.me/faktura78',
+  getSiteSettings: async () => ({
+    brandName: 'Faktura / 78',
+    siteUrl: 'https://factura78.ru',
+    city: 'Санкт-Петербург',
+    defaultTheme: 'dark',
+    primaryCtaLabel: 'Отправить фото',
+    secondaryCtaLabel: 'Цены и сроки',
+    scheduleText: ['Ежедневно, 11:00-20:00'],
+    yandexMetrikaId: undefined,
+    googleSiteVerification: undefined,
+    yandexVerification: undefined,
+  }),
+}));
+
 import BaseLayout from '../../src/layouts/BaseLayout.astro';
 
 describe('base layout', () => {

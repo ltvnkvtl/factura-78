@@ -1,5 +1,11 @@
 ---
-const { items } = Astro.props;
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  items: CollectionEntry<'faq'>[];
+}
+
+const { items } = Astro.props as Props;
 ---
 <div class="grid">
   {items.map((item) => (

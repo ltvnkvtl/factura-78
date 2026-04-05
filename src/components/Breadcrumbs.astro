@@ -1,5 +1,14 @@
 ---
-const { items } = Astro.props;
+type BreadcrumbItem = {
+  name: string;
+  href: string;
+};
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props as Props;
 ---
 <nav aria-label="Хлебные крошки" class="container" style="padding-top:1rem;">
   <ol style="display:flex;gap:0.5rem;list-style:none;padding:0;margin:0;flex-wrap:wrap;">

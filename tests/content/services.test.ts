@@ -1,10 +1,22 @@
+import path from 'node:path';
+import { readdir } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
-import { getCollection } from 'astro:content';
+import { readMarkdownScalar } from '../helpers/content-fixtures';
 
 describe('service content', () => {
   it('contains all seven стартовых service pages in display order', async () => {
-    const services = await getCollection('services');
-    const slugs = services.sort((a, b) => a.data.order - b.data.order).map((service) => service.data.slug);
+    const dirPath = path.resolve('src/content/services');
+    const files = (await readdir(dirPath)).filter((file) => file.endsWith('.md'));
+    const services = await Promise.all(
+      files.map(async (file) => {
+        const filePath = path.join(dirPath, file);
+        return {
+          order: Number(await readMarkdownScalar(filePath, 'order')),
+          slug: await readMarkdownScalar(filePath, 'slug'),
+        };
+      }),
+    );
+    const slugs = services.sort((a, b) => a.order - b.order).map((service) => service.slug);
 
     expect(slugs).toEqual([
       'remont-obuvi-spb',
