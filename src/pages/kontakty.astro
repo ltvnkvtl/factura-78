@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PrimaryCta from '../components/PrimaryCta.astro';
+import { getPrimaryCtaHref, getSitePage, getSiteSettings } from '../lib/content';
+
+const page = await getSitePage('contacts');
+const settings = await getSiteSettings();
+const primaryHref = getPrimaryCtaHref(settings);
+---
+<BaseLayout title={page.data.seoTitle} description={page.data.seoDescription} pathname="/kontakty/">
+  <section class="section"><div class="container grid" style="grid-template-columns:2fr 1fr;"><div class="card"><h1>{page.data.heroTitle}</h1><p>{page.data.heroLead}</p><p>Город: {settings.city}</p><p>График: {settings.scheduleText.join(' · ')}</p>{settings.addressText && <p>Адрес: {settings.addressText}</p>}</div><aside class="card"><h2>Связаться</h2><div style="display:grid;gap:0.75rem;"><PrimaryCta href={primaryHref} label={settings.primaryCtaLabel} />{settings.telegramUrl && <PrimaryCta href={settings.telegramUrl} label="Написать в Telegram" variant="secondary" />}{settings.whatsappUrl && <PrimaryCta href={settings.whatsappUrl} label="Написать в WhatsApp" variant="secondary" />}{settings.phoneE164 && <PrimaryCta href={`tel:${settings.phoneE164}`} label={settings.phoneDisplay ?? 'Позвонить'} variant="secondary" />}</div></aside></div></section>
+</BaseLayout>

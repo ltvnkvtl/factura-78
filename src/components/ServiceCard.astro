@@ -1,0 +1,11 @@
+---
+import PrimaryCta from './PrimaryCta.astro';
+const { item } = Astro.props;
+---
+<article class="card">
+  <h2 style="margin-top:0;">{item.data.title}</h2>
+  <p>{item.data.excerpt}</p>
+  <p><strong>{item.data.priceNote}</strong></p>
+  <p>{item.data.turnaround}</p>
+  <PrimaryCta href={`/uslugi/${item.data.slug}/`} label="Подробнее" variant="secondary" />
+</article>

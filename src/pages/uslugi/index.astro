@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { getOrderedServices, getPrimaryCtaHref, getSitePage, getSiteSettings } from '../../lib/content';
+
+const settings = await getSiteSettings();
+const page = await getSitePage('services');
+const services = await getOrderedServices();
+const primaryHref = getPrimaryCtaHref(settings);
+---
+<BaseLayout title={page.data.seoTitle} description={page.data.seoDescription} pathname="/uslugi/">
+  <Hero eyebrow="Услуги" title={page.data.heroTitle} lead={page.data.heroLead} primaryHref={primaryHref} primaryLabel={settings.primaryCtaLabel} secondaryHref="/ceny-i-sroki/" secondaryLabel={settings.secondaryCtaLabel} />
+  <section class="section"><div class="container grid">{services.map((item) => <ServiceCard item={item} />)}</div></section>
+</BaseLayout>

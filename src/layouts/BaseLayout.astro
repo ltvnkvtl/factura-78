@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SeoHead from '../components/SeoHead.astro';
+import Analytics from '../components/Analytics.astro';
+import { buildOrganizationSchema, canonicalFromPath } from '../lib/seo';
+import { getPrimaryCtaHref, getSiteSettings } from '../lib/content';
+
+const { title, description, pathname = '/', schema = [] } = Astro.props;
+const settings = await getSiteSettings();
+const primaryHref = getPrimaryCtaHref(settings);
+const canonical = canonicalFromPath(settings.siteUrl, pathname);
+const fullSchema = [buildOrganizationSchema(settings), ...schema];
+---
+<!doctype html>
+<html lang="ru" data-theme={settings.defaultTheme}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <SeoHead title={title} description={description} canonical={canonical} schema={fullSchema} />
+    <Analytics yandexMetrikaId={settings.yandexMetrikaId} googleSiteVerification={settings.googleSiteVerification} yandexVerification={settings.yandexVerification} />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Перейти к содержимому</a>
+    <SiteHeader brandName={settings.brandName} primaryHref={primaryHref} primaryLabel={settings.primaryCtaLabel} />
+    <main id="content"><slot /></main>
+    <SiteFooter brandName={settings.brandName} city={settings.city} scheduleText={settings.scheduleText} />
+  </body>
+</html>

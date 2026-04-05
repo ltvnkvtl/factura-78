@@ -1,0 +1,8 @@
+---
+const { item } = Astro.props;
+---
+<article class="card">
+  <h2 style="margin-top:0;">{item.data.title}</h2>
+  <p>{item.data.excerpt}</p>
+  <ul>{item.data.result.map((point) => <li>{point}</li>)}</ul>
+</article>

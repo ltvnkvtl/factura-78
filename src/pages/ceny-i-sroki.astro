@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getOrderedServices, getSitePage } from '../lib/content';
+const page = await getSitePage('prices');
+const services = await getOrderedServices();
+---
+<BaseLayout title={page.data.seoTitle} description={page.data.seoDescription} pathname="/ceny-i-sroki/">
+  <section class="section"><div class="container card"><h1>{page.data.heroTitle}</h1><p>{page.data.heroLead}</p><ul>{services.map((service) => <li><strong>{service.data.title}</strong>: {service.data.priceNote} · {service.data.turnaround}</li>)}</ul></div></section>
+</BaseLayout>

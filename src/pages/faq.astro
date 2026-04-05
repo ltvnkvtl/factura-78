@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqList from '../components/FaqList.astro';
+import { getOrderedFaq, getSitePage } from '../lib/content';
+const page = await getSitePage('faq');
+const faq = await getOrderedFaq();
+---
+<BaseLayout title={page.data.seoTitle} description={page.data.seoDescription} pathname="/faq/">
+  <section class="section"><div class="container"><h1>{page.data.heroTitle}</h1><p>{page.data.heroLead}</p><FaqList items={faq} /></div></section>
+</BaseLayout>

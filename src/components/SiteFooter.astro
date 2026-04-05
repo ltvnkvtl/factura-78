@@ -1,0 +1,10 @@
+---
+const { brandName, city, scheduleText } = Astro.props;
+---
+<footer class="section">
+  <div class="container card" style="display:grid;gap:0.75rem;">
+    <strong>{brandName}</strong><span>{city}</span>
+    <span>Сайт услуг без лишнего шума: ремонт, чистка, реставрация, доставка по городу.</span>
+    <span>{scheduleText.join(' · ')}</span>
+  </div>
+</footer>

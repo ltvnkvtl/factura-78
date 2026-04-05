@@ -1,0 +1,8 @@
+---
+const { yandexMetrikaId, googleSiteVerification, yandexVerification } = Astro.props;
+---
+{googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification} />}
+{yandexVerification && <meta name="yandex-verification" content={yandexVerification} />}
+{yandexMetrikaId && (
+  <script is:inline set:html={`window.ym=window.ym||function(){(window.ym.a=window.ym.a||[]).push(arguments)};ym(${yandexMetrikaId},"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});`} />
+)}
