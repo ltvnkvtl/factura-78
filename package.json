@@ -1,24 +1,21 @@
 {
   "name": "factura-78",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check",
-    "test": "vitest run"
+    "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.0.0",
-    "astro": "^5.0.0"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.8",
-    "@types/node": "^24.0.0",
-    "execa": "^9.0.0",
-    "typescript": "^5.9.0",
-    "vitest": "^3.0.0"
+    "@astrojs/preact": "^5.1.1",
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.1.5",
+    "lucide-preact": "^1.8.0",
+    "preact": "^10.29.1",
+    "tailwindcss": "^4.2.2"
   }
 }

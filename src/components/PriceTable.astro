@@ -1,0 +1,42 @@
+---
+interface PriceRow {
+  label: string;
+  min: number;
+  max: number;
+  days_min: number;
+  days_max: number;
+}
+
+interface Props {
+  title: string;
+  rows: PriceRow[];
+}
+
+const { title, rows } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full text-sm">
+    <caption class="text-left text-lg font-semibold text-[var(--color-text-primary)] mb-4">{title}</caption>
+    <thead>
+      <tr class="border-b border-[var(--color-border-default)]">
+        <th class="text-left py-3 pr-4 text-[var(--color-text-tertiary)] font-medium text-xs uppercase tracking-wider">Работа</th>
+        <th class="text-right py-3 px-4 text-[var(--color-text-tertiary)] font-medium text-xs uppercase tracking-wider">Цена</th>
+        <th class="text-right py-3 pl-4 text-[var(--color-text-tertiary)] font-medium text-xs uppercase tracking-wider">Срок</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map(row => (
+        <tr class="border-b border-[var(--color-border-subtle)]">
+          <td class="py-3 pr-4 text-[var(--color-text-primary)]">{row.label}</td>
+          <td class="text-right py-3 px-4 text-[var(--color-accent)] font-medium whitespace-nowrap">
+            от {row.min.toLocaleString('ru-RU')} ₽
+          </td>
+          <td class="text-right py-3 pl-4 text-[var(--color-text-secondary)] whitespace-nowrap">
+            {row.days_min}–{row.days_max} дн.
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

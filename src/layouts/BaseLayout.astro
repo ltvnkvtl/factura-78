@@ -1,30 +1,39 @@
 ---
 import '../styles/global.css';
-import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SeoHead from '../components/SeoHead.astro';
-import Analytics from '../components/Analytics.astro';
-import { buildOrganizationSchema, canonicalFromPath } from '../lib/seo';
-import { getPrimaryCtaHref, getSiteSettings } from '../lib/content';
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
 
-const { title, description, pathname = '/', schema = [] } = Astro.props;
-const settings = await getSiteSettings();
-const primaryHref = getPrimaryCtaHref(settings);
-const canonical = canonicalFromPath(settings.siteUrl, pathname);
-const fullSchema = [buildOrganizationSchema(settings), ...schema];
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+}
+
+const props = Astro.props;
 ---
+
 <!doctype html>
-<html lang="ru" data-theme={settings.defaultTheme}>
+<html lang="ru">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <SeoHead title={title} description={description} canonical={canonical} schema={fullSchema} />
-    <Analytics yandexMetrikaId={settings.yandexMetrikaId} googleSiteVerification={settings.googleSiteVerification} yandexVerification={settings.yandexVerification} />
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'light' || (!saved && !prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+    <BaseHead {...props} />
   </head>
-  <body>
-    <a class="skip-link" href="#content">Перейти к содержимому</a>
-    <SiteHeader brandName={settings.brandName} primaryHref={primaryHref} primaryLabel={settings.primaryCtaLabel} />
-    <main id="content"><slot /></main>
-    <SiteFooter brandName={settings.brandName} city={settings.city} scheduleText={settings.scheduleText} />
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1 pt-16 md:pt-18">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

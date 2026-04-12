@@ -1,6 +1,9 @@
 .DS_Store
 .idea/
 .superpowers/
-node_modules/
 .astro/
+.cursor/
+node_modules/
 dist/
+.env
+*.local

@@ -1,11 +1,25 @@
 ---
-import PrimaryCta from './PrimaryCta.astro';
-const { item } = Astro.props;
+import { withBase } from '@/utils/basePath';
+
+interface Props {
+  slug: string;
+  title: string;
+  shortDescription: string;
+  priceFrom: number;
+}
+
+const { slug, title, shortDescription, priceFrom } = Astro.props;
 ---
-<article class="card">
-  <h2 style="margin-top:0;">{item.data.title}</h2>
-  <p>{item.data.excerpt}</p>
-  <p><strong>{item.data.priceNote}</strong></p>
-  <p>{item.data.turnaround}</p>
-  <PrimaryCta href={`/uslugi/${item.data.slug}/`} label="Подробнее" variant="secondary" />
-</article>
+
+<a href={withBase(`/uslugi/${slug}/`)} class="card block no-underline cursor-pointer group">
+  <h3 class="text-lg font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors duration-200 mb-2">
+    {title}
+  </h3>
+  <p class="text-sm text-[var(--color-text-secondary)] mb-4 leading-relaxed">
+    {shortDescription}
+  </p>
+  <div class="flex items-center justify-between">
+    <span class="text-sm font-medium text-[var(--color-accent)]">от {priceFrom.toLocaleString('ru-RU')} ₽</span>
+    <span class="text-xs text-[var(--color-text-tertiary)] group-hover:text-[var(--color-accent)] transition-colors duration-200">Подробнее →</span>
+  </div>
+</a>

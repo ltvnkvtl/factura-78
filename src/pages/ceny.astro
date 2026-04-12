@@ -1,0 +1,80 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+import PriceTable from '@components/PriceTable.astro';
+import ContactCTA from '@components/ContactCTA.astro';
+import prices from '@data/prices.json';
+import business from '@data/business.json';
+import { withBase } from '@/utils/basePath';
+
+const categories = [
+  { key: 'shoes', data: prices.shoes },
+  { key: 'bags', data: prices.bags },
+  { key: 'jackets', data: prices.jackets },
+  { key: 'cleaning', data: prices.cleaning },
+];
+
+const allOffers = categories.flatMap(cat =>
+  Object.values(cat.data.works).map((w: any) => ({
+    "@type": "Offer",
+    "name": `${cat.data.label}: ${w.label}`,
+    "priceCurrency": "RUB",
+    "price": w.min,
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "minPrice": w.min,
+      "maxPrice": w.max,
+      "priceCurrency": "RUB"
+    }
+  }))
+);
+---
+
+<BaseLayout
+  title="Цены на ремонт обуви, сумок и кожаных изделий — Фактура / 78"
+  description="Цены на ремонт обуви, сумок, курток и химчистку в Санкт-Петербурге. Прозрачные цены, сроки работ. Оценка по фото."
+>
+  <Breadcrumb items={[{ label: 'Цены' }]} />
+
+  <section class="section">
+    <div class="container max-w-3xl">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Цены на ремонт обуви, сумок и&nbsp;кожаных изделий</h1>
+      <p class="text-lg text-[var(--color-text-secondary)] mb-10">
+        Указаны ориентировочные цены. Точная стоимость определяется после осмотра или по фото.
+        Все цены в рублях.
+      </p>
+
+      <div class="space-y-12">
+        {categories.map(cat => (
+          <PriceTable
+            title={cat.data.label}
+            rows={Object.values(cat.data.works) as any[]}
+          />
+        ))}
+      </div>
+
+      <div class="mt-12 p-6 rounded-lg bg-[var(--color-bg-surface)] border border-[var(--color-border-subtle)] text-center">
+        <p class="text-[var(--color-text-secondary)] mb-4">
+          Не нашли свою услугу? Цены зависят от сложности — отправьте фото для точной оценки.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Оценить по фото
+          </a>
+          <a href={withBase('/kalkulyator/')} class="btn-secondary">
+            Онлайн-калькулятор
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "name": "Прайс-лист мастерской Фактура / 78",
+    "itemListElement": allOffers
+  })} />
+</BaseLayout>

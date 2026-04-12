@@ -1,0 +1,51 @@
+{
+  "shoes": {
+    "label": "Обувь",
+    "types": ["Кроссовки", "Ботинки", "Туфли", "Сапоги", "Другое"],
+    "works": {
+      "sole_replacement": { "label": "Замена подошвы", "min": 2500, "max": 5000, "days_min": 3, "days_max": 7 },
+      "heel_replacement": { "label": "Замена каблука", "min": 800, "max": 2500, "days_min": 1, "days_max": 3 },
+      "zipper_repair": { "label": "Ремонт молнии", "min": 1000, "max": 2500, "days_min": 2, "days_max": 5 },
+      "painting": { "label": "Покраска", "min": 1500, "max": 4000, "days_min": 3, "days_max": 7 },
+      "stitching": { "label": "Прошив", "min": 500, "max": 1500, "days_min": 1, "days_max": 3 },
+      "insole": { "label": "Замена стельки", "min": 300, "max": 800, "days_min": 1, "days_max": 2 }
+    }
+  },
+  "bags": {
+    "label": "Сумки",
+    "types": ["Кожаная", "Текстильная", "Рюкзак", "Клатч", "Другое"],
+    "works": {
+      "handle_repair": { "label": "Ремонт ручки", "min": 1500, "max": 4000, "days_min": 3, "days_max": 7 },
+      "zipper_repair": { "label": "Замена молнии", "min": 1200, "max": 3000, "days_min": 2, "days_max": 5 },
+      "lining_replacement": { "label": "Замена подкладки", "min": 2000, "max": 5000, "days_min": 5, "days_max": 10 },
+      "painting": { "label": "Покраска", "min": 2000, "max": 6000, "days_min": 3, "days_max": 7 },
+      "clasp_repair": { "label": "Ремонт застёжки", "min": 800, "max": 2500, "days_min": 2, "days_max": 5 }
+    }
+  },
+  "jackets": {
+    "label": "Куртки",
+    "types": ["Кожаная", "Замшевая", "Экокожа", "Другое"],
+    "works": {
+      "zipper_repair": { "label": "Замена молнии", "min": 2000, "max": 4500, "days_min": 3, "days_max": 7 },
+      "patch": { "label": "Заплатка", "min": 1500, "max": 4000, "days_min": 3, "days_max": 7 },
+      "painting": { "label": "Покраска", "min": 3000, "max": 8000, "days_min": 5, "days_max": 10 },
+      "lining_replacement": { "label": "Замена подкладки", "min": 3000, "max": 7000, "days_min": 5, "days_max": 14 },
+      "seam_repair": { "label": "Ремонт швов", "min": 1000, "max": 3000, "days_min": 2, "days_max": 5 }
+    }
+  },
+  "cleaning": {
+    "label": "Химчистка",
+    "types": ["Обувь (кожа)", "Обувь (замша)", "Обувь (текстиль)", "Сумка (кожа)", "Сумка (текстиль)"],
+    "works": {
+      "standard": { "label": "Стандартная чистка", "min": 1000, "max": 2500, "days_min": 2, "days_max": 5 },
+      "deep": { "label": "Глубокая чистка", "min": 2000, "max": 4000, "days_min": 3, "days_max": 7 },
+      "stain_removal": { "label": "Удаление пятен", "min": 800, "max": 2000, "days_min": 2, "days_max": 5 },
+      "protection": { "label": "Пропитка", "min": 500, "max": 1500, "days_min": 1, "days_max": 2 }
+    }
+  },
+  "conditionMultiplier": {
+    "light": 1.0,
+    "medium": 1.3,
+    "heavy": 1.7
+  }
+}
