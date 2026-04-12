@@ -27,7 +27,7 @@ const { title, rows } = Astro.props;
     </thead>
     <tbody>
       {rows.map(row => (
-        <tr class="border-b border-[var(--color-border-subtle)]">
+        <tr class="border-b border-[var(--color-border-subtle)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-accent)_6%,var(--color-bg-base))]">
           <td class="py-3 pr-4 text-[var(--color-text-primary)]">{row.label}</td>
           <td class="text-right py-3 px-4 text-[var(--color-accent)] font-medium whitespace-nowrap">
             от {row.min.toLocaleString('ru-RU')} ₽

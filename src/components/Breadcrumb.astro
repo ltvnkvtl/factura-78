@@ -27,7 +27,10 @@ const siteOrigin = Astro.site?.origin ?? 'https://factura78.ru';
       <li class="flex items-center gap-1">
         {i > 0 && <span class="mx-1">/</span>}
         {item.href && i < fullItems.length - 1 ? (
-          <a href={item.href} class="hover:text-[var(--color-accent)] no-underline transition-colors duration-200">
+          <a
+            href={item.href}
+            class="rounded-sm hover:text-[var(--color-accent)] no-underline transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+          >
             {item.label}
           </a>
         ) : (

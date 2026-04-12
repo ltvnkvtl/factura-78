@@ -99,7 +99,7 @@ const {
         <PriceTable title={priceTableTitle} rows={prices} />
         <p class="mt-4 text-sm text-[var(--color-text-tertiary)]">
           Точная стоимость определяется после осмотра изделия или по фото.
-          <a href={withBase('/ceny/')} class="text-[var(--color-accent)]">Полный прайс-лист →</a>
+          <a href={withBase('/ceny/')} class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] underline underline-offset-2">Полный прайс-лист →</a>
         </p>
       </div>
 
@@ -108,7 +108,7 @@ const {
         <div class="mb-12">
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl font-semibold">Примеры работ</h2>
-            <a href={withBase('/kejsy/')} class="text-sm text-[var(--color-accent)] no-underline">Все кейсы →</a>
+            <a href={withBase('/kejsy/')} class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline hover:underline underline-offset-2">Все кейсы →</a>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {cases.map(c => (

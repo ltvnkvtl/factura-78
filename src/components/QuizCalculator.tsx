@@ -313,7 +313,9 @@ function OptionCard({ label, selected, onClick }: { label: string; selected: boo
         padding: '1rem',
         borderRadius: '12px',
         border: `1px solid ${selected ? 'var(--color-accent)' : 'var(--color-border-subtle)'}`,
-        backgroundColor: selected ? 'var(--color-bg-elevated)' : 'var(--color-bg-surface)',
+        backgroundColor: selected
+          ? 'color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-surface))'
+          : 'var(--color-bg-surface)',
         color: 'var(--color-text-primary)',
         fontSize: '0.875rem',
         fontWeight: selected ? 600 : 400,
@@ -347,7 +349,9 @@ function CheckboxCard({
         padding: '0.875rem 1rem',
         borderRadius: '12px',
         border: `1px solid ${checked ? 'var(--color-accent)' : 'var(--color-border-subtle)'}`,
-        backgroundColor: checked ? 'var(--color-bg-elevated)' : 'var(--color-bg-surface)',
+        backgroundColor: checked
+          ? 'color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-surface))'
+          : 'var(--color-bg-surface)',
         cursor: 'pointer',
         transition: 'all 200ms ease-out',
       }}

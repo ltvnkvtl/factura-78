@@ -74,7 +74,10 @@ import business from '@data/business.json';
         </ul>
         <p>
           Для реализации указанных прав направьте запрос на электронную почту:
-          <a href={`mailto:${business.email}`}>{business.email}</a> или по телефону {business.phone}.
+          <a
+            href={`mailto:${business.email}`}
+            class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] underline underline-offset-2"
+          >{business.email}</a> или по телефону {business.phone}.
         </p>
 
         <h2 class="text-lg font-semibold text-[var(--color-text-primary)] !mt-8">7. Cookie</h2>

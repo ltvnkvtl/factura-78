@@ -15,9 +15,9 @@ const { items, schemaPage = true } = Astro.props;
 <div class="space-y-3">
   {items.map((item, i) => (
     <details class="group border border-[var(--color-border-subtle)] rounded-lg overflow-hidden">
-      <summary class="flex items-center justify-between gap-4 p-4 cursor-pointer text-[var(--color-text-primary)] font-medium hover:bg-[var(--color-bg-elevated)] transition-colors duration-200 list-none [&::-webkit-details-marker]:hidden">
+      <summary class="flex items-center justify-between gap-4 p-4 cursor-pointer text-[var(--color-text-primary)] font-medium hover:bg-[var(--color-bg-elevated)] transition-colors duration-200 list-none [&::-webkit-details-marker]:hidden rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]">
         <span>{item.question}</span>
-        <svg class="w-5 h-5 shrink-0 text-[var(--color-text-tertiary)] transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 shrink-0 text-[var(--color-text-tertiary)] transition-transform duration-200 group-open:rotate-180 group-open:text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </summary>

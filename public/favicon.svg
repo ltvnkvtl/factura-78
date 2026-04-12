@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#0F0E0D"/>
-  <text x="4" y="23" font-family="system-ui, sans-serif" font-weight="800" font-size="16" fill="#C4956A">$</text>
-  <text x="16" y="23" font-family="system-ui, sans-serif" font-weight="400" font-size="12" fill="#706A60">/78</text>
+  <rect width="32" height="32" rx="6" fill="#222327"/>
+  <text x="2" y="23" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="15" fill="#f2d85b">Ф</text>
+  <text x="17" y="23" font-family="system-ui, -apple-system, sans-serif" font-weight="400" font-size="12" fill="#71757e">/78</text>
 </svg>
