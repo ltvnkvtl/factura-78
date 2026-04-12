@@ -1,8 +1,0 @@
----
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getSitePage } from '../lib/content';
-const page = await getSitePage('delivery');
----
-<BaseLayout title={page.data.seoTitle} description={page.data.seoDescription} pathname="/zabor-i-dostavka/">
-  <section class="section"><div class="container card"><h1>{page.data.heroTitle}</h1><p>{page.data.heroLead}</p><ol><li>Присылаете фото и адрес в Санкт-Петербурге.</li><li>Получаете ориентир по стоимости и формату передачи вещи.</li><li>Согласовываете забор или доставку без лишних звонков.</li></ol></div></section>
-</BaseLayout>
