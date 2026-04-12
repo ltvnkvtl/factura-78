@@ -16,13 +16,14 @@ const props = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
   <head>
     <script is:inline>
       (function () {
         var saved = localStorage.getItem('theme');
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'light' || (!saved && !prefersDark)) {
+        if (saved === 'dark') {
+          document.documentElement.removeAttribute('data-theme');
+        } else {
           document.documentElement.setAttribute('data-theme', 'light');
         }
       })();
