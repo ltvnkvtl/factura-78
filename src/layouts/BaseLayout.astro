@@ -18,6 +18,15 @@ const props = Astro.props;
 <!doctype html>
 <html lang="ru">
   <head>
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'light' || (!saved && !prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
     <BaseHead {...props} />
   </head>
   <body class="min-h-screen flex flex-col">

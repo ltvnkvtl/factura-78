@@ -41,6 +41,25 @@
   }
 }
 
+/* Light theme overrides */
+[data-theme="light"] {
+  --color-bg-base: #FAF8F5;
+  --color-bg-surface: #F2EDE6;
+  --color-bg-elevated: #E8E0D6;
+  --color-border-default: #C8BEB3;
+  --color-border-subtle: #DDD6CD;
+  --color-text-primary: #1C1916;
+  --color-text-secondary: #5C5248;
+  --color-text-tertiary: #8A7E74;
+  --color-accent: #9E6B3E;
+  --color-accent-hover: #7D5230;
+  --color-accent-cta: #A06B38;
+  --color-accent-cta-hover: #7D5230;
+  --color-success: #4A7A4A;
+  --color-error: #B04020;
+  --color-info: #4A6D8C;
+}
+
 @layer base {
   html {
     font-family: var(--font-body);

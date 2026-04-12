@@ -38,6 +38,23 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <div class="flex items-center gap-3">
+      <!-- Theme toggle -->
+      <button
+        id="theme-toggle"
+        class="p-2 text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors duration-200 cursor-pointer"
+        aria-label="Переключить тему"
+      >
+        <!-- Sun icon (shown in dark mode) -->
+        <svg id="icon-sun" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <!-- Moon icon (shown in light mode) -->
+        <svg id="icon-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
       <!-- Social icons (desktop) -->
       <div class="hidden md:flex items-center gap-2">
         <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="p-2 text-[var(--color-text-tertiary)] hover:text-[var(--color-accent)] transition-colors duration-200 cursor-pointer" aria-label="WhatsApp">
@@ -102,6 +119,7 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
+  // Mobile menu
   const toggle = document.getElementById('mobile-menu-toggle');
   const menu = document.getElementById('mobile-menu');
   if (toggle && menu) {
@@ -111,4 +129,34 @@ const currentPath = Astro.url.pathname;
       toggle.setAttribute('aria-expanded', String(!isOpen));
     });
   }
+
+  // Theme toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const iconSun = document.getElementById('icon-sun');
+  const iconMoon = document.getElementById('icon-moon');
+
+  function applyTheme(theme: string) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      iconSun?.classList.add('hidden');
+      iconMoon?.classList.remove('hidden');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      iconSun?.classList.remove('hidden');
+      iconMoon?.classList.add('hidden');
+    }
+  }
+
+  function getCurrentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+
+  // Sync icon on load
+  applyTheme(getCurrentTheme());
+
+  themeToggle?.addEventListener('click', () => {
+    const next = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', next);
+    applyTheme(next);
+  });
 </script>
