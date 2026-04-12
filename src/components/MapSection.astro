@@ -1,0 +1,76 @@
+---
+import business from '@data/business.json';
+
+const { lat, lng } = business.geo;
+const bboxPad = 0.02;
+const minLon = lng - bboxPad;
+const minLat = lat - bboxPad;
+const maxLon = lng + bboxPad;
+const maxLat = lat + bboxPad;
+const osmEmbed = `https://www.openstreetmap.org/export/embed.html?bbox=${minLon}%2C${minLat}%2C${maxLon}%2C${maxLat}&layer=mapnik&marker=${lat}%2C${lng}`;
+
+function formatHours(): string {
+  const parts: string[] = [];
+  for (const row of business.openingHours) {
+    const label =
+      row.days === 'Mo-Fr'
+        ? 'Пн–Пт'
+        : row.days === 'Sa'
+          ? 'Сб'
+          : row.days === 'Su'
+            ? 'Вс'
+            : row.days;
+    if (row.opens === 'closed') {
+      parts.push(`${label}: выходной`);
+      continue;
+    }
+    parts.push(`${label}: ${row.opens}–${row.closes}`);
+  }
+  return parts.join(' · ');
+}
+
+const hoursLine = formatHours();
+---
+
+<section class="section bg-[var(--color-bg-surface)] border-y border-[var(--color-border-subtle)]" aria-labelledby="map-heading">
+  <div class="container">
+    <h2 id="map-heading" class="text-2xl md:text-3xl font-bold mb-8">Как нас найти</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <div class="rounded-xl overflow-hidden border border-[var(--color-border-subtle)] bg-[var(--color-bg-elevated)] aspect-[4/3] lg:aspect-auto lg:min-h-[320px]">
+        <iframe
+          title="Карта — мастерская Фактура / 78"
+          src={osmEmbed}
+          class="w-full h-full min-h-[280px] lg:min-h-[320px]"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        />
+      </div>
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] mb-2">Адрес</h3>
+          <p class="text-lg text-[var(--color-text-primary)] leading-relaxed">
+            {business.address.street}, {business.address.city}
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] mb-2">Режим</h3>
+          <p class="text-[var(--color-text-secondary)] leading-relaxed">{hoursLine}</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] mb-3">Связь</h3>
+          <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+            <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm !py-2.5 !px-4">
+              WhatsApp
+            </a>
+            <a href={business.social.telegram} target="_blank" rel="noopener noreferrer" class="btn-secondary text-sm !py-2.5 !px-4">
+              Telegram
+            </a>
+            <a href={`tel:${business.phone.replace(/[\s()-]/g, '')}`} class="btn-secondary text-sm !py-2.5 !px-4">
+              {business.phone}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

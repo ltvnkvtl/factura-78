@@ -136,7 +136,7 @@ const currentPath = Astro.url.pathname;
   const iconSun = document.getElementById('icon-sun');
   const iconMoon = document.getElementById('icon-moon');
 
-  function applyTheme(theme: string) {
+  function applyTheme(theme) {
     if (theme === 'light') {
       document.documentElement.setAttribute('data-theme', 'light');
       iconSun?.classList.add('hidden');

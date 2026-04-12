@@ -1,0 +1,52 @@
+---
+interface Props {
+  message?: string;
+  storageKey?: string;
+}
+
+const {
+  message = 'Первый заказ: отправьте фото в мессенджер — подскажем услугу и срок.',
+  storageKey = 'factura78-promo-strip',
+} = Astro.props;
+---
+
+<div
+  id="promo-strip"
+  class="hidden border-b border-[color-mix(in_srgb,var(--color-promo-bg)_55%,transparent)] bg-[var(--color-promo-bg)] text-[var(--color-promo-text)]"
+  role="region"
+  aria-label="Акция"
+>
+  <div class="container flex items-center justify-between gap-4 py-2.5 text-sm md:text-[0.9375rem] font-medium leading-snug">
+    <p class="m-0 pr-2">{message}</p>
+    <button
+      type="button"
+      id="promo-strip-close"
+      class="shrink-0 rounded-md px-2 py-1 text-[var(--color-promo-text)] hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-promo-text)] cursor-pointer border-0 bg-transparent font-semibold"
+      aria-label="Скрыть объявление"
+    >
+      Закрыть
+    </button>
+  </div>
+</div>
+
+<script define:vars={{ storageKey }}>
+  (function () {
+    var strip = document.getElementById('promo-strip');
+    var closeBtn = document.getElementById('promo-strip-close');
+    if (!strip || !closeBtn) return;
+    try {
+      if (localStorage.getItem(storageKey) === '1') return;
+    } catch {
+      /* ignore */
+    }
+    strip.classList.remove('hidden');
+    closeBtn.addEventListener('click', function () {
+      strip.classList.add('hidden');
+      try {
+        localStorage.setItem(storageKey, '1');
+      } catch {
+        /* ignore */
+      }
+    });
+  })();
+</script>

@@ -1,11 +1,16 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import PromoStrip from '@components/PromoStrip.astro';
+import HomeHero from '@components/HomeHero.astro';
+import BeforeAfterSplit from '@components/BeforeAfterSplit.astro';
 import ServiceCard from '@components/ServiceCard.astro';
+import CleaningSteps from '@components/CleaningSteps.astro';
 import CaseCard from '@components/CaseCard.astro';
+import BeforeAfterSlider from '@components/BeforeAfterSlider';
 import FAQ from '@components/FAQ.astro';
 import TrustBlock from '@components/TrustBlock.astro';
+import MapSection from '@components/MapSection.astro';
 import ContactCTA from '@components/ContactCTA.astro';
-import business from '@data/business.json';
 import services from '@data/services.json';
 import { withBase } from '@/utils/basePath';
 
@@ -17,46 +22,43 @@ const faq = [
   { question: 'Даёте ли гарантию?', answer: 'Да, на все виды работ предоставляем гарантию. Срок зависит от типа ремонта: от 2 недель на мелкий ремонт до 6 месяцев на замену подошвы.' },
 ];
 
-const steps = [
-  { num: '01', title: 'Отправьте фото', desc: 'Сфотографируйте изделие и отправьте в WhatsApp или Telegram' },
-  { num: '02', title: 'Получите оценку', desc: 'Мы определим объём работ и сообщим стоимость и сроки' },
-  { num: '03', title: 'Привезите или закажите доставку', desc: 'Занесите изделие в мастерскую или вызовите курьера по СПб' },
-  { num: '04', title: 'Заберите результат', desc: 'Заберите отремонтированное изделие или получите курьером' },
+const orderSteps = [
+  { num: '01', title: 'Отправьте фото', desc: 'Сфотографируйте пару и отправьте в WhatsApp или Telegram' },
+  { num: '02', title: 'Получите оценку', desc: 'Определим объём работ и сообщим стоимость и сроки' },
+  { num: '03', title: 'Сдайте пару', desc: 'Привезите в мастерскую или закажите доставку по СПб' },
+  { num: '04', title: 'Заберите результат', desc: 'Заберите готовую обувь или получите курьером' },
+];
+
+const cleaningSteps = [
+  { num: '01', title: 'Сухая подготовка', desc: 'Снимаем пыль и поверхностные загрязнения, разбираем шнурки и стельку при необходимости.' },
+  { num: '02', title: 'Подошва и швы', desc: 'Аккуратно очищаем рант, протяжку и швы без повреждения клеевых швов.' },
+  { num: '03', title: 'Химия под материал', desc: 'Подбираем средства и режим под кожу, замшу, нубук, текстиль или комбинированные панели.' },
+  { num: '04', title: 'Пятна и въевшаяся грязь', desc: 'Точечно работаем со сложными загрязнениями, сохраняя цвет и фактуру.' },
+  { num: '05', title: 'Форма и детали', desc: 'Восстанавливаем силуэт, подравниваем ворс замши, убираем заломы на текстиле.' },
+  { num: '06', title: 'Финиш', desc: 'Пропитка или кондиционирование по типу материала, контроль результата перед выдачей.' },
 ];
 ---
 
 <BaseLayout
-  title="Ремонт обуви, сумок и кожи в СПб — Фактура / 78"
-  description="Профессиональный ремонт обуви, сумок и кожаных изделий в Санкт-Петербурге. Оценка по фото, доставка по СПб. Химчистка, покраска, реставрация."
+  title="Ремонт и химчистка обуви в СПб — Фактура / 78"
+  description="Ремонт и химчистка обуви в Санкт-Петербурге: кроссовки, кеды, ботинки. Сумки и кожа. Оценка по фото, доставка по СПб."
 >
-  <!-- Hero -->
-  <section class="section bg-[var(--color-bg-base)] relative overflow-hidden">
-    <div class="container">
-      <div class="max-w-2xl">
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
-          Ремонт обуви, сумок и кожаных изделий в&nbsp;<span class="text-[var(--color-accent)]">Санкт-Петербурге</span>
-        </h1>
-        <p class="text-lg text-[var(--color-text-secondary)] mb-8 leading-relaxed max-w-xl">
-          Профессиональная реставрация, химчистка и покраска. Оценка по фото за час, доставка по СПб.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary text-base">
-            Отправить фото
-          </a>
-          <a href={withBase('/kalkulyator/')} class="btn-secondary text-base">
-            Рассчитать стоимость
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <PromoStrip />
 
-  <!-- Services -->
+  <HomeHero />
+
+  <BeforeAfterSplit
+    title="Результат в одном кадре"
+    description="Так удобнее сравнивать: одна и та же пара до и после обработки в мастерской."
+    beforeAlt="Кроссовки с загрязнённым верхом и подошвой — до химчистки"
+    afterAlt="Те же кроссовки после комплексной чистки и восстановления белого ранта"
+  />
+
   <section class="section">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-8">Наши услуги</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-8">Услуги</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map(service => (
+        {services.map((service) => (
           <ServiceCard
             slug={service.slug}
             title={service.title}
@@ -71,14 +73,15 @@ const steps = [
     </div>
   </section>
 
-  <!-- How it works -->
-  <section class="section bg-[var(--color-bg-surface)]">
+  <CleaningSteps steps={cleaningSteps} />
+
+  <section class="section bg-[var(--color-bg-surface)] border-y border-[var(--color-border-subtle)]">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-10 text-center">Как мы работаем</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-10 text-center">Как сделать заказ</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {steps.map(step => (
+        {orderSteps.map((step) => (
           <div class="text-center">
-            <div class="text-3xl font-extrabold text-[var(--color-accent)] mb-3">{step.num}</div>
+            <div class="text-3xl font-extrabold text-[var(--color-accent-cta)] mb-3 font-[var(--font-heading)]">{step.num}</div>
             <h3 class="text-lg font-semibold mb-2">{step.title}</h3>
             <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{step.desc}</p>
           </div>
@@ -87,23 +90,29 @@ const steps = [
     </div>
   </section>
 
-  <!-- Cases preview -->
-  <section class="section">
+  <section class="section" aria-labelledby="cases-heading">
     <div class="container">
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold">Наши работы</h2>
-        <a href={withBase('/kejsy/')} class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline transition-colors duration-200">
+      <div class="flex items-center justify-between mb-8 gap-4">
+        <h2 id="cases-heading" class="text-2xl md:text-3xl font-bold">Наши работы</h2>
+        <a
+          href={withBase('/kejsy/')}
+          class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline transition-colors duration-200 shrink-0"
+        >
           Все кейсы →
         </a>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <CaseCard
-          title="Реставрация подошвы кроссовок"
-          category="Ремонт обуви"
-          description="Полная замена изношенной подошвы с сохранением оригинального дизайна"
-          beforeAlt="Кроссовки с изношенной подошвой — до ремонта"
-          afterAlt="Кроссовки после замены подошвы"
+
+      <div class="max-w-3xl mx-auto mb-10">
+        <BeforeAfterSlider
+          client:visible
+          title="Сравнение до и после"
+          description="Ползунок на фото — типичный приём сникер-химчисток: наглядно видно объём работы."
+          beforeAlt="Кроссовки с изношенной подошвой и потёртостями — до ремонта"
+          afterAlt="Кроссовки после замены подошвы и комплексной чистки верха"
         />
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <CaseCard
           title="Покраска кожаной сумки"
           category="Ремонт сумок"
@@ -118,11 +127,17 @@ const steps = [
           beforeAlt="Кожаная куртка со сломанной молнией — до ремонта"
           afterAlt="Кожаная куртка с новой молнией YKK"
         />
+        <CaseCard
+          title="Реставрация подошвы кроссовок"
+          category="Ремонт обуви"
+          description="Полная замена изношенной подошвы с сохранением оригинального дизайна"
+          beforeAlt="Кроссовки с изношенной подошвой — до ремонта"
+          afterAlt="Кроссовки после замены подошвы"
+        />
       </div>
     </div>
   </section>
 
-  <!-- Trust -->
   <section class="section bg-[var(--color-bg-surface)]">
     <div class="container">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Отзывы наших клиентов</h2>
@@ -130,7 +145,6 @@ const steps = [
     </div>
   </section>
 
-  <!-- FAQ -->
   <section class="section">
     <div class="container max-w-3xl">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Частые вопросы</h2>
@@ -138,6 +152,7 @@ const steps = [
     </div>
   </section>
 
-  <!-- CTA -->
+  <MapSection />
+
   <ContactCTA />
 </BaseLayout>

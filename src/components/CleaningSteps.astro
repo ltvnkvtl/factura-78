@@ -1,0 +1,42 @@
+---
+interface CleaningStep {
+  num: string;
+  title: string;
+  desc: string;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  steps: CleaningStep[];
+}
+
+const {
+  title = 'Этапы химчистки обуви',
+  subtitle = 'Ручная обработка и подбор средств под материал пары.',
+  steps,
+} = Astro.props;
+---
+
+<section class="section" aria-labelledby="cleaning-steps-heading">
+  <div class="container">
+    <div class="max-w-2xl mb-10">
+      <h2 id="cleaning-steps-heading" class="text-2xl md:text-3xl font-bold mb-2">{title}</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">{subtitle}</p>
+    </div>
+    <div
+      class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0 -mx-1 px-1"
+      style="scrollbar-width: thin;"
+    >
+      {steps.map((step) => (
+        <article
+          class="snap-start shrink-0 w-[min(100%,280px)] md:w-auto card md:min-h-[140px] border-[var(--color-border-subtle)]"
+        >
+          <div class="text-sm font-extrabold text-[var(--color-accent-cta)] mb-2 font-[var(--font-heading)]">{step.num}</div>
+          <h3 class="text-base font-semibold text-[var(--color-text-primary)] mb-1.5">{step.title}</h3>
+          <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{step.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

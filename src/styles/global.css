@@ -6,22 +6,25 @@
   --font-body: 'Cabin', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Dark theme (base) */
-  --color-bg-base: #0F0E0D;
-  --color-bg-surface: #1A1917;
-  --color-bg-elevated: #252420;
-  --color-border-default: #3A3835;
-  --color-border-subtle: #2A2825;
-  --color-text-primary: #F0EBE3;
-  --color-text-secondary: #A89F93;
-  --color-text-tertiary: #706A60;
-  --color-accent: #C4956A;
-  --color-accent-hover: #D4A87E;
-  --color-accent-cta: #D4A574;
-  --color-accent-cta-hover: #E0B889;
-  --color-success: #6B9E6B;
-  --color-error: #C75B39;
-  --color-info: #6B8DAE;
+  /* Dark theme (default) — холодная палитра в духе sneaker-сервисов */
+  --color-bg-base: #222327;
+  --color-bg-surface: #1b1c22;
+  --color-bg-elevated: #2c2e36;
+  --color-border-default: #3d4149;
+  --color-border-subtle: #2f3138;
+  --color-text-primary: #f0f1f3;
+  --color-text-secondary: #9ca3af;
+  --color-text-tertiary: #71757e;
+  --color-accent: #41b6f0;
+  --color-accent-hover: #7ad0ff;
+  --color-accent-cta: #1d98dc;
+  --color-accent-cta-hover: #4dc3ff;
+  --color-on-accent: #ffffff;
+  --color-success: #27d061;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
+  --color-promo-bg: #ffe239;
+  --color-promo-text: #1a1b22;
 
   /* Spacing scale */
   --spacing-section-y: 4rem;
@@ -41,23 +44,26 @@
   }
 }
 
-/* Light theme overrides */
+/* Light theme */
 [data-theme="light"] {
-  --color-bg-base: #FAF8F5;
-  --color-bg-surface: #F2EDE6;
-  --color-bg-elevated: #E8E0D6;
-  --color-border-default: #C8BEB3;
-  --color-border-subtle: #DDD6CD;
-  --color-text-primary: #1C1916;
-  --color-text-secondary: #5C5248;
-  --color-text-tertiary: #8A7E74;
-  --color-accent: #9E6B3E;
-  --color-accent-hover: #7D5230;
-  --color-accent-cta: #A06B38;
-  --color-accent-cta-hover: #7D5230;
-  --color-success: #4A7A4A;
-  --color-error: #B04020;
-  --color-info: #4A6D8C;
+  --color-bg-base: #f4f5f7;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #e8eaef;
+  --color-border-default: #c5cad4;
+  --color-border-subtle: #dce0e8;
+  --color-text-primary: #111218;
+  --color-text-secondary: #4b5563;
+  --color-text-tertiary: #6b7280;
+  --color-accent: #0b7abf;
+  --color-accent-hover: #095f96;
+  --color-accent-cta: #1d98dc;
+  --color-accent-cta-hover: #1578ad;
+  --color-on-accent: #ffffff;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --color-info: #2563eb;
+  --color-promo-bg: #ffe239;
+  --color-promo-text: #1a1b22;
 }
 
 @layer base {
@@ -104,7 +110,7 @@
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
     background-color: var(--color-accent-cta);
-    color: var(--color-bg-base);
+    color: var(--color-on-accent);
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1rem;
@@ -116,7 +122,7 @@
   }
   .btn-primary:hover {
     background-color: var(--color-accent-cta-hover);
-    color: var(--color-bg-base);
+    color: var(--color-on-accent);
   }
   .btn-primary:active {
     transform: scale(0.98);
@@ -161,7 +167,11 @@
   }
   .card:hover {
     border-color: var(--color-border-default);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  [data-theme="light"] .card:hover {
+    box-shadow: 0 4px 24px rgba(17, 18, 24, 0.08);
   }
 
   .section {

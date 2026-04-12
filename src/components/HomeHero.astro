@@ -1,0 +1,47 @@
+---
+import business from '@data/business.json';
+import { withBase } from '@/utils/basePath';
+---
+
+<section class="section relative overflow-hidden bg-[var(--color-bg-base)]" aria-labelledby="hero-heading">
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.12]"
+    style="background-image: radial-gradient(circle at 20% 20%, var(--color-accent-cta), transparent 45%), radial-gradient(circle at 80% 10%, var(--color-accent), transparent 40%);"
+    aria-hidden="true"
+  />
+  <div class="container relative">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-3">Санкт-Петербург</p>
+        <h1 id="hero-heading" class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
+          Ремонт и химчистка обуви в&nbsp;<span class="text-[var(--color-accent)]">Санкт-Петербурге</span>
+        </h1>
+        <p class="text-lg text-[var(--color-text-secondary)] mb-8 leading-relaxed max-w-xl">
+          Кроссовки, кеды, ботинки: восстановление, чистка и покраска. Также сумки и кожа. Оценка по фото за час, доставка по СПб.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary text-base">
+            Отправить фото
+          </a>
+          <a href={withBase('/kalkulyator/')} class="btn-secondary text-base">
+            Рассчитать стоимость
+          </a>
+        </div>
+      </div>
+      <div class="relative">
+        <div
+          class="aspect-[4/3] rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-bg-elevated)] overflow-hidden shadow-xl"
+          role="img"
+          aria-label="Интерьер мастерской — фото появится позже"
+        >
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
+            <span class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] mb-2">Мастерская</span>
+            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed max-w-sm">
+              Здесь будет фото рабочего места или пары «в работе» — усиливает доверие, как на референс-сайтах ниши.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
