@@ -5,6 +5,7 @@ import PriceTable from '@components/PriceTable.astro';
 import ContactCTA from '@components/ContactCTA.astro';
 import prices from '@data/prices.json';
 import business from '@data/business.json';
+import { withBase } from '@/utils/basePath';
 
 const categories = [
   { key: 'shoes', data: prices.shoes },
@@ -60,7 +61,7 @@ const allOffers = categories.flatMap(cat =>
           <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary">
             Оценить по фото
           </a>
-          <a href="/kalkulyator/" class="btn-secondary">
+          <a href={withBase('/kalkulyator/')} class="btn-secondary">
             Онлайн-калькулятор
           </a>
         </div>

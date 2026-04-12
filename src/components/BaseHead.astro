@@ -1,5 +1,6 @@
 ---
 import business from '@data/business.json';
+import { withBase } from '@/utils/basePath';
 
 interface Props {
   title: string;
@@ -42,7 +43,7 @@ const ogImageURL = ogImage ? new URL(ogImage, Astro.site).href : undefined;
 <meta property="og:site_name" content={business.name} />
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
 
 <!-- JSON-LD: LocalBusiness (global) -->
 <script type="application/ld+json" set:html={JSON.stringify({

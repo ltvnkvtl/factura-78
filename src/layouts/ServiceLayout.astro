@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { withBase } from '@/utils/basePath';
 import Breadcrumb from '@components/Breadcrumb.astro';
 import PriceTable from '@components/PriceTable.astro';
 import CaseCard from '@components/CaseCard.astro';
@@ -98,7 +99,7 @@ const {
         <PriceTable title={priceTableTitle} rows={prices} />
         <p class="mt-4 text-sm text-[var(--color-text-tertiary)]">
           Точная стоимость определяется после осмотра изделия или по фото.
-          <a href="/ceny/" class="text-[var(--color-accent)]">Полный прайс-лист →</a>
+          <a href={withBase('/ceny/')} class="text-[var(--color-accent)]">Полный прайс-лист →</a>
         </p>
       </div>
 
@@ -107,7 +108,7 @@ const {
         <div class="mb-12">
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl font-semibold">Примеры работ</h2>
-            <a href="/kejsy/" class="text-sm text-[var(--color-accent)] no-underline">Все кейсы →</a>
+            <a href={withBase('/kejsy/')} class="text-sm text-[var(--color-accent)] no-underline">Все кейсы →</a>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {cases.map(c => (
@@ -127,7 +128,7 @@ const {
       <div class="flex flex-wrap gap-3">
         <span class="text-sm text-[var(--color-text-tertiary)]">Смотрите также:</span>
         {relatedLinks.map(link => (
-          <a href={link.href} class="text-sm text-[var(--color-accent)] no-underline hover:text-[var(--color-accent-hover)] transition-colors duration-200">
+          <a href={withBase(link.href)} class="text-sm text-[var(--color-accent)] no-underline hover:text-[var(--color-accent-hover)] transition-colors duration-200">
             {link.label}
           </a>
         ))}

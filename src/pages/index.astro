@@ -7,6 +7,7 @@ import TrustBlock from '@components/TrustBlock.astro';
 import ContactCTA from '@components/ContactCTA.astro';
 import business from '@data/business.json';
 import services from '@data/services.json';
+import { withBase } from '@/utils/basePath';
 
 const faq = [
   { question: 'Как узнать стоимость ремонта?', answer: 'Отправьте фото изделия в WhatsApp или Telegram — мы оценим работу и сообщим ориентировочную стоимость в течение часа. Также можно воспользоваться онлайн-калькулятором на сайте.' },
@@ -42,7 +43,7 @@ const steps = [
           <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary text-base">
             Отправить фото
           </a>
-          <a href="/kalkulyator/" class="btn-secondary text-base">
+          <a href={withBase('/kalkulyator/')} class="btn-secondary text-base">
             Рассчитать стоимость
           </a>
         </div>
@@ -65,7 +66,7 @@ const steps = [
         ))}
       </div>
       <div class="mt-8 text-center">
-        <a href="/uslugi/" class="btn-secondary">Все услуги</a>
+        <a href={withBase('/uslugi/')} class="btn-secondary">Все услуги</a>
       </div>
     </div>
   </section>
@@ -91,7 +92,7 @@ const steps = [
     <div class="container">
       <div class="flex items-center justify-between mb-8">
         <h2 class="text-2xl md:text-3xl font-bold">Наши работы</h2>
-        <a href="/kejsy/" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline transition-colors duration-200">
+        <a href={withBase('/kejsy/')} class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline transition-colors duration-200">
           Все кейсы →
         </a>
       </div>
