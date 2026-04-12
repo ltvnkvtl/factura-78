@@ -1,0 +1,53 @@
+---
+import business from '@data/business.json';
+
+const platforms = [
+  {
+    name: 'Яндекс',
+    url: business.reviews.yandex.url,
+    rating: business.reviews.yandex.rating,
+    icon: 'Y',
+    color: '#FC3F1D'
+  },
+  {
+    name: '2ГИС',
+    url: business.reviews.twogis.url,
+    rating: business.reviews.twogis.rating,
+    icon: '2',
+    color: '#2BAF2B'
+  },
+  {
+    name: 'Авито',
+    url: business.reviews.avito.url,
+    rating: business.reviews.avito.rating,
+    icon: 'A',
+    color: '#00AAFF'
+  },
+];
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  {platforms.map(platform => (
+    <a
+      href={platform.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="card flex items-center gap-4 no-underline cursor-pointer"
+    >
+      <div
+        class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg shrink-0"
+        style={`background-color: ${platform.color}`}
+      >
+        {platform.icon}
+      </div>
+      <div>
+        <div class="text-sm font-medium text-[var(--color-text-primary)]">Отзывы на {platform.name}</div>
+        {platform.rating ? (
+          <div class="text-sm text-[var(--color-accent)]">★ {platform.rating}</div>
+        ) : (
+          <div class="text-xs text-[var(--color-text-tertiary)]">Перейти к отзывам</div>
+        )}
+      </div>
+    </a>
+  ))}
+</div>

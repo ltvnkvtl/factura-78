@@ -1,0 +1,55 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+import CaseCard from '@components/CaseCard.astro';
+import ContactCTA from '@components/ContactCTA.astro';
+
+const cases = [
+  { title: 'Замена подошвы на кроссовках Nike', category: 'Ремонт обуви', description: 'Полная замена изношенной подошвы с сохранением оригинального дизайна', beforeAlt: 'Кроссовки Nike с изношенной подошвой — до ремонта', afterAlt: 'Кроссовки Nike после замены подошвы' },
+  { title: 'Покраска замшевых ботинок', category: 'Ремонт обуви', description: 'Восстановление цвета и обработка защитным составом', beforeAlt: 'Замшевые ботинки с выцветшим цветом — до покраски', afterAlt: 'Замшевые ботинки после покраски и обработки' },
+  { title: 'Реставрация кожаной сумки', category: 'Ремонт сумок', description: 'Восстановление цвета, замена ручек и ремонт молнии', beforeAlt: 'Кожаная сумка с потёртостями и сломанной молнией — до ремонта', afterAlt: 'Кожаная сумка после полной реставрации' },
+  { title: 'Замена молнии на кожаной куртке', category: 'Ремонт курток', description: 'Установка новой молнии YKK взамен сломанной, подбор по цвету', beforeAlt: 'Кожаная куртка со сломанной молнией — до ремонта', afterAlt: 'Кожаная куртка с новой молнией YKK после ремонта' },
+  { title: 'Химчистка белых кроссовок', category: 'Химчистка', description: 'Глубокая чистка и восстановление белизны кроссовок', beforeAlt: 'Грязные белые кроссовки — до химчистки', afterAlt: 'Чистые белые кроссовки после профессиональной химчистки' },
+  { title: 'Покраска кожаных туфель', category: 'Уход за кожей', description: 'Восстановление цвета и нанесение защитного слоя', beforeAlt: 'Кожаные туфли с потёртостями — до покраски', afterAlt: 'Кожаные туфли после профессиональной покраски' },
+];
+
+const categories = ['Все', ...new Set(cases.map(c => c.category))];
+---
+
+<BaseLayout
+  title="Наши работы — до и после — Фактура / 78"
+  description="Примеры работ мастерской Фактура / 78: фото до и после ремонта обуви, сумок, курток. Реальные кейсы из Санкт-Петербурга."
+>
+  <Breadcrumb items={[{ label: 'Кейсы' }]} />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Наши работы — до и после</h1>
+      <p class="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl">
+        Реальные примеры ремонта и реставрации. Каждый кейс — уникальная задача с индивидуальным решением.
+      </p>
+
+      <!-- Category filter (static, no JS needed for MVP) -->
+      <div class="flex flex-wrap gap-2 mb-8">
+        {categories.map((cat, i) => (
+          <span class:list={[
+            'px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors duration-200',
+            i === 0
+              ? 'bg-[var(--color-accent-cta)] text-[var(--color-bg-base)]'
+              : 'bg-[var(--color-bg-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border-subtle)] hover:border-[var(--color-accent)]'
+          ]}>
+            {cat}
+          </span>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cases.map(c => (
+          <CaseCard {...c} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA title="Хотите такой же результат?" subtitle="Отправьте фото изделия — оценим работу бесплатно" />
+</BaseLayout>

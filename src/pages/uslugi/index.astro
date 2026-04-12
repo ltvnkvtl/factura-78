@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import ContactCTA from '@components/ContactCTA.astro';
+import services from '@data/services.json';
+---
+
+<BaseLayout
+  title="Услуги мастерской — ремонт, химчистка, уход за кожей — Фактура / 78"
+  description="Услуги мастерской Фактура / 78: ремонт обуви, сумок, курток, химчистка, покраска и уход за кожей в Санкт-Петербурге."
+>
+  <Breadcrumb items={[{ label: 'Услуги' }]} />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Услуги мастерской — ремонт, химчистка, уход за&nbsp;кожей</h1>
+      <p class="text-lg text-[var(--color-text-secondary)] mb-10 max-w-2xl">
+        Полный спектр услуг по ремонту и уходу за обувью, сумками и кожаными изделиями.
+        Оценка по фото, доставка по Санкт-Петербургу.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map(service => (
+          <ServiceCard
+            slug={service.slug}
+            title={service.title}
+            shortDescription={service.shortDescription}
+            priceFrom={service.priceFrom}
+          />
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-[var(--color-text-secondary)] mb-4">Не знаете, что именно нужно?</p>
+        <a href="/kalkulyator/" class="btn-primary">Рассчитать стоимость онлайн</a>
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA />
+</BaseLayout>

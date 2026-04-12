@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+import ContactCTA from '@components/ContactCTA.astro';
+import business from '@data/business.json';
+---
+
+<BaseLayout
+  title="О мастерской — Фактура / 78"
+  description="Мастерская Фактура / 78 в Санкт-Петербурге: опыт, профессиональные материалы, индивидуальный подход к каждому изделию."
+>
+  <Breadcrumb items={[{ label: 'О мастере' }]} />
+
+  <section class="section">
+    <div class="container max-w-3xl">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-6">О мастерской Фактура / 78</h1>
+
+      <div class="prose-custom space-y-6 text-[var(--color-text-secondary)] leading-relaxed">
+        <p class="text-lg">
+          «Фактура / 78» — мастерская по ремонту и уходу за обувью, сумками и кожаными изделиями в Санкт-Петербурге.
+          Мы работаем, чтобы ваши любимые вещи служили дольше и выглядели как новые.
+        </p>
+
+        <h2 class="text-xl font-semibold text-[var(--color-text-primary)] !mt-10">Наш подход</h2>
+        <p>
+          Каждое изделие уникально — мы не работаем по шаблону. Перед началом ремонта оцениваем состояние,
+          подбираем оптимальное решение и согласовываем с вами стоимость и сроки. Вы всегда знаете,
+          что именно мы делаем и почему.
+        </p>
+
+        <h2 class="text-xl font-semibold text-[var(--color-text-primary)] !mt-10">Материалы и инструменты</h2>
+        <p>
+          Используем профессиональные материалы от проверенных производителей: краски Saphir и Tarrago
+          для покраски кожи, клеевые составы для надёжной фиксации, фурнитуру YKK.
+          Подошвы и каблуки подбираем по типу обуви и условиям эксплуатации.
+        </p>
+
+        <h2 class="text-xl font-semibold text-[var(--color-text-primary)] !mt-10">Опыт</h2>
+        <p>
+          За время работы отремонтировали сотни пар обуви, десятки сумок и курток.
+          Работаем с повседневной обувью, спортивными кроссовками, дизайнерскими сумками и винтажными кожаными куртками.
+          Каждый кейс — это опыт, который помогает решать следующие задачи быстрее и качественнее.
+        </p>
+
+        <h2 class="text-xl font-semibold text-[var(--color-text-primary)] !mt-10">Принципы</h2>
+        <ul class="space-y-2 list-disc list-inside">
+          <li>Честная оценка — не берёмся, если ремонт нецелесообразен</li>
+          <li>Прозрачные цены — стоимость определяется до начала работы</li>
+          <li>Сроки — говорим реальные сроки и соблюдаем их</li>
+          <li>Гарантия — отвечаем за результат</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA title="Есть вопрос?" subtitle="Напишите нам — с удовольствием проконсультируем" />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "[УТОЧНИТЬ: имя мастера]",
+    "jobTitle": "Мастер по ремонту кожаных изделий",
+    "worksFor": {
+      "@type": "ProfessionalService",
+      "name": business.name
+    }
+  })} />
+</BaseLayout>

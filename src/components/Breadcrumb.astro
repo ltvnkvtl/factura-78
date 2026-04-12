@@ -1,0 +1,41 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const fullItems = [{ label: 'Главная', href: '/' }, ...items];
+---
+
+<nav aria-label="Хлебные крошки" class="container py-4">
+  <ol class="flex flex-wrap items-center gap-1 text-sm text-[var(--color-text-tertiary)]">
+    {fullItems.map((item, i) => (
+      <li class="flex items-center gap-1">
+        {i > 0 && <span class="mx-1">/</span>}
+        {item.href && i < fullItems.length - 1 ? (
+          <a href={item.href} class="hover:text-[var(--color-accent)] no-underline transition-colors duration-200">
+            {item.label}
+          </a>
+        ) : (
+          <span class="text-[var(--color-text-secondary)]">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": fullItems.map((item, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": item.label,
+    ...(item.href ? { "item": `https://factura78.ru${item.href}` } : {})
+  }))
+})} />

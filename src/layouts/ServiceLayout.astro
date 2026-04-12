@@ -1,0 +1,162 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+import PriceTable from '@components/PriceTable.astro';
+import CaseCard from '@components/CaseCard.astro';
+import FAQ from '@components/FAQ.astro';
+import ContactCTA from '@components/ContactCTA.astro';
+import business from '@data/business.json';
+
+interface PriceRow {
+  label: string;
+  min: number;
+  max: number;
+  days_min: number;
+  days_max: number;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface CaseItem {
+  title: string;
+  category: string;
+  description: string;
+  beforeAlt: string;
+  afterAlt: string;
+}
+
+interface Props {
+  title: string;
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  intro: string;
+  works: string[];
+  prices: PriceRow[];
+  priceTableTitle: string;
+  faq: FAQItem[];
+  cases: CaseItem[];
+  relatedLinks: { href: string; label: string }[];
+  schemaService: {
+    name: string;
+    description: string;
+    lowPrice: number;
+    highPrice: number;
+  };
+}
+
+const {
+  title,
+  metaTitle,
+  metaDescription,
+  h1,
+  intro,
+  works,
+  prices,
+  priceTableTitle,
+  faq,
+  cases,
+  relatedLinks,
+  schemaService,
+} = Astro.props;
+---
+
+<BaseLayout title={metaTitle} description={metaDescription}>
+  <Breadcrumb items={[
+    { label: 'Услуги', href: '/uslugi/' },
+    { label: title },
+  ]} />
+
+  <section class="section">
+    <div class="container">
+      <div class="max-w-3xl">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-6">{h1}</h1>
+        <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8">{intro}</p>
+      </div>
+
+      <!-- Works list -->
+      <div class="mb-12">
+        <h2 class="text-xl font-semibold mb-4">Виды работ</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {works.map(work => (
+            <div class="flex items-center gap-3 p-3 rounded-lg bg-[var(--color-bg-surface)] border border-[var(--color-border-subtle)]">
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-sm text-[var(--color-text-primary)]">{work}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Prices -->
+      <div class="mb-12 max-w-2xl">
+        <h2 class="text-xl font-semibold mb-6">Цены и сроки</h2>
+        <PriceTable title={priceTableTitle} rows={prices} />
+        <p class="mt-4 text-sm text-[var(--color-text-tertiary)]">
+          Точная стоимость определяется после осмотра изделия или по фото.
+          <a href="/ceny/" class="text-[var(--color-accent)]">Полный прайс-лист →</a>
+        </p>
+      </div>
+
+      <!-- Cases -->
+      {cases.length > 0 && (
+        <div class="mb-12">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-semibold">Примеры работ</h2>
+            <a href="/kejsy/" class="text-sm text-[var(--color-accent)] no-underline">Все кейсы →</a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {cases.map(c => (
+              <CaseCard {...c} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- FAQ -->
+      <div class="mb-12 max-w-3xl">
+        <h2 class="text-xl font-semibold mb-6">Частые вопросы</h2>
+        <FAQ items={faq} />
+      </div>
+
+      <!-- Related links -->
+      <div class="flex flex-wrap gap-3">
+        <span class="text-sm text-[var(--color-text-tertiary)]">Смотрите также:</span>
+        {relatedLinks.map(link => (
+          <a href={link.href} class="text-sm text-[var(--color-accent)] no-underline hover:text-[var(--color-accent-hover)] transition-colors duration-200">
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA />
+
+  <!-- Schema: Service -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": schemaService.name,
+    "description": schemaService.description,
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": business.name,
+      "url": business.url
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Санкт-Петербург"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": schemaService.lowPrice,
+      "highPrice": schemaService.highPrice,
+      "priceCurrency": "RUB"
+    }
+  })} />
+</BaseLayout>

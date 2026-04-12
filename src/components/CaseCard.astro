@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  category: string;
+  description: string;
+  beforeAlt: string;
+  afterAlt: string;
+}
+
+const { title, category, description, beforeAlt, afterAlt } = Astro.props;
+---
+
+<div class="card overflow-hidden">
+  <div class="grid grid-cols-2 gap-1 mb-4 rounded-lg overflow-hidden bg-[var(--color-bg-elevated)]">
+    <div class="aspect-[4/3] relative">
+      <div class="absolute inset-0 flex items-center justify-center text-[var(--color-text-tertiary)] text-sm">
+        Фото «до»
+      </div>
+      <span class="absolute top-2 left-2 text-xs bg-[var(--color-bg-base)]/80 text-[var(--color-text-secondary)] px-2 py-0.5 rounded">До</span>
+    </div>
+    <div class="aspect-[4/3] relative">
+      <div class="absolute inset-0 flex items-center justify-center text-[var(--color-text-tertiary)] text-sm">
+        Фото «после»
+      </div>
+      <span class="absolute top-2 left-2 text-xs bg-[var(--color-accent-cta)]/90 text-[var(--color-bg-base)] px-2 py-0.5 rounded">После</span>
+    </div>
+  </div>
+  <span class="text-xs font-medium uppercase tracking-wider text-[var(--color-accent)] mb-1 block">{category}</span>
+  <h3 class="text-base font-semibold text-[var(--color-text-primary)] mb-1">{title}</h3>
+  <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{description}</p>
+</div>
