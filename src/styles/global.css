@@ -6,7 +6,7 @@
   --font-body: 'Cabin', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Dark theme (default) — холодная палитра в духе sneaker-сервисов */
+  /* Dark theme (default) — акцент золотисто-жёлтый как на референсе */
   --color-bg-base: #222327;
   --color-bg-surface: #1b1c22;
   --color-bg-elevated: #2c2e36;
@@ -15,16 +15,16 @@
   --color-text-primary: #f0f1f3;
   --color-text-secondary: #9ca3af;
   --color-text-tertiary: #71757e;
-  --color-accent: #41b6f0;
-  --color-accent-hover: #7ad0ff;
-  --color-accent-cta: #1d98dc;
-  --color-accent-cta-hover: #4dc3ff;
-  --color-on-accent: #ffffff;
+  --color-accent: #f2d85b;
+  --color-accent-hover: #f9e78a;
+  --color-accent-cta: #f2d85b;
+  --color-accent-cta-hover: #e8cc52;
+  --color-on-accent: #16171a;
   --color-success: #27d061;
   --color-error: #f87171;
-  --color-info: #60a5fa;
-  --color-promo-bg: #ffe239;
-  --color-promo-text: #1a1b22;
+  --color-info: #94a3b8;
+  --color-promo-bg: #e8cf5a;
+  --color-promo-text: #16171a;
 
   /* Spacing scale */
   --spacing-section-y: 4rem;
@@ -54,29 +54,59 @@
   --color-text-primary: #111218;
   --color-text-secondary: #4b5563;
   --color-text-tertiary: #6b7280;
-  --color-accent: #0b7abf;
-  --color-accent-hover: #095f96;
-  --color-accent-cta: #1d98dc;
-  --color-accent-cta-hover: #1578ad;
-  --color-on-accent: #ffffff;
+  --color-accent: #9a7b1a;
+  --color-accent-hover: #7d6314;
+  --color-accent-cta: #f2d85b;
+  --color-accent-cta-hover: #e5ca4d;
+  --color-on-accent: #16171a;
   --color-success: #16a34a;
   --color-error: #dc2626;
-  --color-info: #2563eb;
-  --color-promo-bg: #ffe239;
-  --color-promo-text: #1a1b22;
+  --color-info: #64748b;
+  --color-promo-bg: #e8cf5a;
+  --color-promo-text: #16171a;
+}
+
+@keyframes page-bg-shimmer {
+  0% {
+    background-position: 0% 0%, 100% 30%, 40% 100%;
+  }
+  100% {
+    background-position: 100% 25%, 0% 55%, 60% 85%;
+  }
 }
 
 @layer base {
   html {
     font-family: var(--font-body);
-    background-color: var(--color-bg-base);
     color: var(--color-text-primary);
     scroll-behavior: smooth;
+    background-color: var(--color-bg-base);
+    background-image:
+      radial-gradient(
+        ellipse 95% 75% at 12% -5%,
+        color-mix(in srgb, var(--color-accent) 14%, transparent) 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 80% 55% at 92% 15%,
+        color-mix(in srgb, var(--color-accent) 9%, transparent) 0%,
+        transparent 52%
+      ),
+      radial-gradient(
+        ellipse 70% 45% at 48% 105%,
+        color-mix(in srgb, var(--color-text-primary) 5%, transparent) 0%,
+        transparent 48%
+      );
+    background-size: 145% 145%, 155% 155%, 125% 125%;
+    background-repeat: no-repeat;
+    animation: page-bg-shimmer 26s ease-in-out infinite alternate;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+      animation: none;
+      background-position: 0% 0%, 100% 20%, 50% 100%;
     }
     *,
     *::before,

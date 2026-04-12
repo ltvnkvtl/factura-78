@@ -46,7 +46,7 @@ export default function BeforeAfterSlider({ title, description, beforeAlt, after
           {beforeAlt}
         </div>
         <div
-          class="absolute inset-0 flex items-center justify-center text-sm text-[var(--color-text-tertiary)] text-center px-6 overflow-hidden border-l-2 border-[var(--color-on-accent)] shadow-[4px_0_24px_rgba(0,0,0,0.35)]"
+          class="absolute inset-0 flex items-center justify-center text-sm text-[var(--color-text-tertiary)] text-center px-6 overflow-hidden border-l-2 border-[var(--color-accent)] shadow-[4px_0_24px_rgba(0,0,0,0.35)]"
           style={{
             clipPath: reducedMotion ? 'inset(0 50% 0 0)' : `inset(0 ${100 - pct}% 0 0)`,
           }}
@@ -58,7 +58,7 @@ export default function BeforeAfterSlider({ title, description, beforeAlt, after
         {!reducedMotion ? (
           <>
             <div
-              class="absolute top-0 bottom-0 w-0.5 bg-[var(--color-on-accent)] pointer-events-none shadow-md z-10"
+              class="absolute top-0 bottom-0 w-0.5 bg-[var(--color-accent)] pointer-events-none shadow-md z-10"
               style={{ left: `${pct}%`, transform: 'translateX(-50%)' }}
             />
             <input

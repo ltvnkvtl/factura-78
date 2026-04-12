@@ -35,7 +35,7 @@ const categories = ['Все', ...new Set(cases.map(c => c.category))];
           <span class:list={[
             'px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors duration-200',
             i === 0
-              ? 'bg-[var(--color-accent-cta)] text-[var(--color-bg-base)]'
+              ? 'bg-[var(--color-accent-cta)] text-[var(--color-on-accent)]'
               : 'bg-[var(--color-bg-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border-subtle)] hover:border-[var(--color-accent)]'
           ]}>
             {cat}
