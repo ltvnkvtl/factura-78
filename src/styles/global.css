@@ -6,25 +6,25 @@
   --font-body: 'Cabin', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Dark theme (default) — акцент золотисто-жёлтый как на референсе */
-  --color-bg-base: #222327;
-  --color-bg-surface: #1b1c22;
-  --color-bg-elevated: #2c2e36;
-  --color-border-default: #3d4149;
-  --color-border-subtle: #2f3138;
-  --color-text-primary: #f0f1f3;
-  --color-text-secondary: #9ca3af;
-  --color-text-tertiary: #71757e;
-  --color-accent: #f2d85b;
-  --color-accent-hover: #f9e78a;
-  --color-accent-cta: #f2d85b;
-  --color-accent-cta-hover: #e8cc52;
-  --color-on-accent: #16171a;
-  --color-success: #27d061;
-  --color-error: #f87171;
-  --color-info: #94a3b8;
-  --color-promo-bg: #e8cf5a;
-  --color-promo-text: #16171a;
+  /* Тёплая нейтральная палитра */
+  --color-bg-base: #F2F2F2;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #e8e3df;
+  --color-border-default: #B8A296;
+  --color-border-subtle: #ddd5cf;
+  --color-text-primary: #231A1B;
+  --color-text-secondary: #514557;
+  --color-text-tertiary: #6E5B58;
+  --color-accent: #514557;
+  --color-accent-hover: #3d3342;
+  --color-accent-cta: #653539;
+  --color-accent-cta-hover: #4f2a2c;
+  --color-on-accent: #F2F2F2;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --color-info: #514557;
+  --color-promo-bg: #653539;
+  --color-promo-text: #F2F2F2;
 
   /* Spacing scale */
   --spacing-section-y: 4rem;
@@ -44,27 +44,6 @@
   }
 }
 
-/* Light theme */
-[data-theme="light"] {
-  --color-bg-base: #f4f5f7;
-  --color-bg-surface: #ffffff;
-  --color-bg-elevated: #e8eaef;
-  --color-border-default: #c5cad4;
-  --color-border-subtle: #dce0e8;
-  --color-text-primary: #111218;
-  --color-text-secondary: #4b5563;
-  --color-text-tertiary: #6b7280;
-  --color-accent: #9a7b1a;
-  --color-accent-hover: #7d6314;
-  --color-accent-cta: #f2d85b;
-  --color-accent-cta-hover: #e5ca4d;
-  --color-on-accent: #16171a;
-  --color-success: #16a34a;
-  --color-error: #dc2626;
-  --color-info: #64748b;
-  --color-promo-bg: #e8cf5a;
-  --color-promo-text: #16171a;
-}
 
 @keyframes page-bg-shimmer {
   0% {
@@ -197,11 +176,7 @@
   }
   .card:hover {
     border-color: var(--color-border-default);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-  }
-
-  [data-theme="light"] .card:hover {
-    box-shadow: 0 4px 24px rgba(17, 18, 24, 0.08);
+    box-shadow: 0 4px 24px rgba(101, 53, 57, 0.12);
   }
 
   .section {
