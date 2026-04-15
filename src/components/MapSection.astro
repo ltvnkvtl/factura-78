@@ -2,24 +2,17 @@
 import business from '@data/business.json';
 
 const { lat, lng } = business.geo;
-const bboxPad = 0.02;
-const minLon = lng - bboxPad;
-const minLat = lat - bboxPad;
-const maxLon = lng + bboxPad;
-const maxLat = lat + bboxPad;
-const osmEmbed = `https://www.openstreetmap.org/export/embed.html?bbox=${minLon}%2C${minLat}%2C${maxLon}%2C${maxLat}&layer=mapnik&marker=${lat}%2C${lng}`;
+const yandexEmbed =
+  `https://yandex.ru/map-widget/v1/?ll=${lng}%2C${lat}&z=16&pt=${lng}%2C${lat}%2Cpm2rdm`;
 
 function formatHours(): string {
   const parts: string[] = [];
   for (const row of business.openingHours) {
     const label =
-      row.days === 'Mo-Fr'
-        ? 'Пн–Пт'
-        : row.days === 'Sa'
-          ? 'Сб'
-          : row.days === 'Su'
-            ? 'Вс'
-            : row.days;
+      row.days === 'Mo-Fr' ? 'Пн–Пт'
+      : row.days === 'Sa' ? 'Сб'
+      : row.days === 'Su' ? 'Вс'
+      : row.days;
     if (row.opens === 'closed') {
       parts.push(`${label}: выходной`);
       continue;
@@ -32,45 +25,44 @@ function formatHours(): string {
 const hoursLine = formatHours();
 ---
 
-<section class="section bg-[var(--color-bg-surface)] border-y border-[var(--color-border-subtle)]" aria-labelledby="map-heading">
-  <div class="container">
-    <h2 id="map-heading" class="text-2xl md:text-3xl font-bold mb-8">Как нас найти</h2>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-      <div class="rounded-xl overflow-hidden border border-[var(--color-border-subtle)] bg-[var(--color-bg-elevated)] aspect-[4/3] lg:aspect-auto lg:min-h-[320px]">
-        <iframe
-          title="Карта — мастерская Фактура / 78"
-          src={osmEmbed}
-          class="w-full h-full min-h-[280px] lg:min-h-[320px]"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        />
-      </div>
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] mb-2">Адрес</h3>
-          <p class="text-lg text-[var(--color-text-primary)] leading-relaxed">
-            {business.address.street}, {business.address.city}
-          </p>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] mb-2">Режим</h3>
-          <p class="text-[var(--color-text-secondary)] leading-relaxed">{hoursLine}</p>
-        </div>
-        <div>
-          <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] mb-3">Связь</h3>
-          <div class="flex flex-col sm:flex-row flex-wrap gap-3">
-            <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm !py-2.5 !px-4">
-              WhatsApp
-            </a>
-            <a href={business.social.telegram} target="_blank" rel="noopener noreferrer" class="btn-secondary text-sm !py-2.5 !px-4">
-              Telegram
-            </a>
-            <a href={`tel:${business.phone.replace(/[\s()-]/g, '')}`} class="btn-secondary text-sm !py-2.5 !px-4">
-              {business.phone}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+<section
+  aria-labelledby="map-heading"
+  class="relative w-full overflow-hidden h-auto md:h-[460px]"
+>
+  <!-- Жёлтая карточка: static на мобильном, absolute overlay слева на десктопе -->
+  <div
+    class="relative z-10 w-full md:absolute md:top-0 md:left-0 md:w-[360px] md:h-full
+           bg-[var(--color-accent)] p-8 md:p-10 flex flex-col justify-center"
+  >
+    <h2
+      id="map-heading"
+      class="font-extrabold uppercase leading-tight text-[var(--color-on-accent)]
+             text-[2rem] md:text-[2.5rem] mb-6"
+    >
+      Приходите<br />к нам
+    </h2>
+    <ul class="space-y-2.5 text-[var(--color-on-accent)] text-base font-medium leading-snug">
+      <li>{hoursLine}</li>
+      <li>г. {business.address.city}, {business.address.street}</li>
+      <li>
+        <a
+          href={`tel:${business.phone.replace(/[\s()\-]/g, '')}`}
+          class="text-[var(--color-on-accent)] no-underline hover:underline"
+        >
+          тел. {business.phone}
+        </a>
+      </li>
+    </ul>
   </div>
+
+  <!-- Яндекс Карта: static 300px на мобильном, absolute inset-0 на десктопе -->
+  <iframe
+    title="Мастерская Фактура / 78 на карте"
+    src={yandexEmbed}
+    class="w-full h-[300px] md:absolute md:inset-0 md:h-full"
+    style="border: 0; display: block;"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen
+  ></iframe>
 </section>

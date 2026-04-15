@@ -13,8 +13,8 @@
     "country": "RU"
   },
   "geo": {
-    "lat": 59.9343,
-    "lng": 30.3351
+    "lat": 59.9362,
+    "lng": 30.3501
   },
   "openingHours": [
     { "days": "Mo-Fr", "opens": "10:00", "closes": "20:00" },
