@@ -3,11 +3,12 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumb from '@components/Breadcrumb.astro';
 import CaseCard from '@components/CaseCard.astro';
 import ContactCTA from '@components/ContactCTA.astro';
+import { withBase } from '@/utils/basePath';
 
 const cases = [
-  { title: 'Покраска кожаной сумки', category: 'Ремонт сумок', description: 'Восстановление цвета и покраска потёртой кожаной сумки в оригинальный тон', beforeAlt: 'Кожаная сумка до покраски', afterAlt: 'Кожаная сумка после покраски', image: '/images/before-after/bag.png' },
-  { title: 'Замена молнии на куртке', category: 'Ремонт курток', description: 'Установка новой молнии YKK взамен сломанной, подбор по цвету', beforeAlt: 'Кожаная куртка со сломанной молнией — до ремонта', afterAlt: 'Кожаная куртка с новой молнией YKK после ремонта', image: '/images/before-after/jacket.png' },
-  { title: 'Реставрация замшевой обуви', category: 'Ремонт обуви', description: 'Глубокая чистка и реставрация замшевых мокасин', beforeAlt: 'Замшевые мокасины до реставрации', afterAlt: 'Замшевые мокасины после реставрации', image: '/images/before-after/shoes.png' },
+  { title: 'Покраска кожаной сумки', category: 'Ремонт сумок', description: 'Восстановление цвета и покраска потёртой кожаной сумки в оригинальный тон', beforeAlt: 'Кожаная сумка до покраски', afterAlt: 'Кожаная сумка после покраски', image: withBase('/images/before-after/bag.png') },
+  { title: 'Замена молнии на куртке', category: 'Ремонт курток', description: 'Установка новой молнии YKK взамен сломанной, подбор по цвету', beforeAlt: 'Кожаная куртка со сломанной молнией — до ремонта', afterAlt: 'Кожаная куртка с новой молнией YKK после ремонта', image: withBase('/images/before-after/jacket.png') },
+  { title: 'Реставрация замшевой обуви', category: 'Ремонт обуви', description: 'Глубокая чистка и реставрация замшевых мокасин', beforeAlt: 'Замшевые мокасины до реставрации', afterAlt: 'Замшевые мокасины после реставрации', image: withBase('/images/before-after/shoes.png') },
   { title: 'Замена подошвы на кроссовках Nike', category: 'Ремонт обуви', description: 'Полная замена изношенной подошвы с сохранением оригинального дизайна', beforeAlt: 'Кроссовки Nike с изношенной подошвой — до ремонта', afterAlt: 'Кроссовки Nike после замены подошвы' },
   { title: 'Химчистка белых кроссовок', category: 'Химчистка', description: 'Глубокая чистка и восстановление белизны кроссовок', beforeAlt: 'Грязные белые кроссовки — до химчистки', afterAlt: 'Чистые белые кроссовки после профессиональной химчистки' },
   { title: 'Покраска кожаных туфель', category: 'Уход за кожей', description: 'Восстановление цвета и нанесение защитного слоя', beforeAlt: 'Кожаные туфли с потёртостями — до покраски', afterAlt: 'Кожаные туфли после профессиональной покраски' },
