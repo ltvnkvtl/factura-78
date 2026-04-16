@@ -3,18 +3,18 @@
   "legalName": "[УТОЧНИТЬ: ИП Фамилия И.О.]",
   "description": "Ремонт и уход за обувью, сумками и кожаными изделиями в Санкт-Петербурге",
   "url": "https://factura78.ru",
-  "phone": "+7 (999) 123-45-67",
-  "email": "info@factura78.ru",
+  "phone": "+7 (981) 989-00-58",
+  "email": "clean_homespb@bk.ru",
   "address": {
-    "street": "[УТОЧНИТЬ: улица, дом]",
+    "street": "Московский проспект 4",
     "city": "Санкт-Петербург",
     "region": "Санкт-Петербург",
-    "postalCode": "[УТОЧНИТЬ]",
+    "postalCode": "190031",
     "country": "RU"
   },
   "geo": {
-    "lat": 59.9362,
-    "lng": 30.3501
+    "lat": 30.318006,
+    "lng": 59.925358
   },
   "openingHours": [
     { "days": "Mo-Fr", "opens": "10:00", "closes": "20:00" },
@@ -22,14 +22,14 @@
     { "days": "Su", "opens": "closed", "closes": "closed" }
   ],
   "social": {
-    "whatsapp": "https://wa.me/79991234567",
-    "telegram": "https://t.me/factura78",
-    "vk": "https://vk.com/factura78"
+    "whatsapp": "https://wa.me/79819890058",
+    "telegram": "https://t.me/APEX01",
+    "vk": "https://vk.com/aversal1"
   },
   "reviews": {
-    "yandex": { "url": "[УТОЧНИТЬ: URL Яндекс Бизнес]", "rating": null },
-    "twogis": { "url": "[УТОЧНИТЬ: URL 2ГИС]", "rating": null },
-    "avito": { "url": "[УТОЧНИТЬ: URL Авито]", "rating": null }
+    "yandex": { "url": "https://yandex.com/maps/-/CPvkJ83w", "rating": 5.0 },
+    "twogis": { "url": "https://go.2gis.com/rPNwS", "rating": 5.0 },
+    "avito": { "url": "https://www.avito.ru/brands/i182115338/all?sellerId=a4420a45d25210d2362984b706975273", "rating": 5.0 }
   },
   "priceRange": "₽₽"
 }

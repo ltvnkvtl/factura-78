@@ -3,12 +3,15 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumb from '@components/Breadcrumb.astro';
 import FAQ from '@components/FAQ.astro';
 import ContactCTA from '@components/ContactCTA.astro';
+import business from '@data/business.json';
+
+const address = `${business.address.street}, ${business.address.city}`;
 
 const faq = [
   { question: 'Сколько стоит доставка?', answer: 'Стоимость доставки зависит от района: в пределах КАД — от 300 ₽ в одну сторону. Точную стоимость уточняйте при оформлении заказа.' },
   { question: 'Как быстро приедет курьер?', answer: 'Обычно в течение 1–2 дней с момента согласования. Точное время доставки обговариваем с вами.' },
   { question: 'Как упаковать изделие для курьера?', answer: 'Положите изделие в пакет или коробку, чтобы защитить от загрязнений при транспортировке. Для обуви подойдёт обувная коробка или плотный пакет.' },
-  { question: 'Можно ли привезти изделие самостоятельно?', answer: 'Конечно! Мастерская расположена по адресу: [УТОЧНИТЬ: адрес]. Приносите в рабочее время без предварительной записи.' },
+  { question: 'Можно ли привезти изделие самостоятельно?', answer: `Конечно! Мастерская расположена по адресу: ${address}. Приносите в рабочее время без предварительной записи.` },
 ];
 ---
 
@@ -70,7 +73,7 @@ const faq = [
           <h2 class="text-lg font-semibold mb-3">Самовывоз</h2>
           <p class="text-[var(--color-text-secondary)]">
             Вы всегда можете принести и забрать изделие самостоятельно.
-            Мастерская расположена по адресу: <strong class="text-[var(--color-text-primary)]">[УТОЧНИТЬ: адрес]</strong>.
+            Мастерская расположена по адресу: <strong class="text-[var(--color-text-primary)]">{address}</strong>.
           </p>
           <p class="text-[var(--color-text-secondary)] mt-2">
             Пн–Пт: 10:00–20:00, Сб: 11:00–18:00
