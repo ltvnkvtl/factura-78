@@ -12,11 +12,11 @@ const { title, category, description, beforeAlt, afterAlt, image } = Astro.props
 ---
 
 <div class="card overflow-hidden">
-  <div class="aspect-[3/2] relative mb-4 rounded-lg overflow-hidden bg-[var(--color-bg-elevated)]">
+  <div class="relative mb-4 rounded-lg overflow-hidden bg-[var(--color-bg-elevated)]">
     {image ? (
-      <img src={image} alt={beforeAlt} class="w-full h-full object-cover" />
+      <img src={image} alt={beforeAlt} class="w-full h-auto block" />
     ) : (
-      <div class="absolute inset-0 flex items-center justify-center text-[var(--color-text-tertiary)] text-sm">
+      <div class="aspect-[3/2] flex items-center justify-center text-[var(--color-text-tertiary)] text-sm">
         Фото «до» / «после»
       </div>
     )}
