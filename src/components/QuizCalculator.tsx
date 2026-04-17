@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import pricesData from '../data/prices.json';
+import business from '../data/business.json';
 
 type Category = 'shoes' | 'bags' | 'jackets' | 'cleaning';
 
@@ -10,9 +11,9 @@ interface StepOption {
 }
 
 const CATEGORIES: StepOption[] = [
-  { value: 'shoes', label: 'Ремонт обуви' },
-  { value: 'bags', label: 'Ремонт сумки' },
-  { value: 'jackets', label: 'Ремонт куртки' },
+  { value: 'shoes', label: 'Реставрация обуви' },
+  { value: 'bags', label: 'Реставрация сумки' },
+  { value: 'jackets', label: 'Реставрация куртки' },
   { value: 'cleaning', label: 'Химчистка' },
 ];
 
@@ -22,9 +23,7 @@ const CONDITIONS: StepOption[] = [
   { value: 'heavy', label: 'Серьёзные повреждения' },
 ];
 
-const WHATSAPP_URL = 'https://wa.me/79991234567';
 const TELEGRAM_URL = 'https://t.me/factura78';
-
 export default function QuizCalculator() {
   const [step, setStep] = useState(0);
   const [category, setCategory] = useState<Category | null>(null);
@@ -79,17 +78,6 @@ export default function QuizCalculator() {
         ? prev.filter(w => w !== key)
         : [...prev, key]
     );
-  }
-
-  function buildWhatsAppMessage(): string {
-    const catLabel = CATEGORIES.find(c => c.value === category)?.label ?? '';
-    const workLabels = selectedWorks
-      .map(wk => worksMap?.[wk]?.label)
-      .filter(Boolean)
-      .join(', ');
-    const condLabel = CONDITIONS.find(c => c.value === condition)?.label ?? '';
-    const text = `Здравствуйте! Хочу оценить ${catLabel.toLowerCase()}.\nТип: ${itemType}\nРаботы: ${workLabels}\nСостояние: ${condLabel}`;
-    return `${WHATSAPP_URL}?text=${encodeURIComponent(text)}`;
   }
 
   function canProceed(): boolean {
@@ -248,7 +236,7 @@ export default function QuizCalculator() {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <a
-              href={buildWhatsAppMessage()}
+              href={business.social.vk}
               target="_blank"
               rel="noopener noreferrer"
               class="btn-primary"
