@@ -30,16 +30,16 @@ import { withBase } from '@/utils/basePath';
       </div>
       <div class="relative">
         <div
-          class="aspect-[4/3] rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-bg-elevated)] overflow-hidden shadow-xl"
+          class="aspect-[4/3] rounded-xl overflow-hidden shadow-xl"
           role="img"
-          aria-label="Интерьер мастерской — фото появится позже"
+          aria-label="Мастер мастерской Фактура / 78"
         >
-          <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
-            <span class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)] mb-2">Мастерская</span>
-            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed max-w-sm">
-              Здесь будет фото рабочего места или пары «в работе» — усиливает доверие, как на референс-сайтах ниши.
-            </p>
-          </div>
+          <img
+            src={withBase('/images/master.jpg')}
+            alt="Мастер мастерской Фактура / 78"
+            class="w-full h-full object-cover"
+            loading="eager"
+          />
         </div>
       </div>
     </div>
