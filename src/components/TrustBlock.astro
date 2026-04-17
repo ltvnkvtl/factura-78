@@ -1,27 +1,50 @@
 ---
 import business from '@data/business.json';
+import { withBase } from '../utils/basePath';
+
+function formatRating(rating: number | null | undefined): string | null {
+  if (typeof rating !== 'number' || Number.isNaN(rating)) return null;
+  return rating.toFixed(1);
+}
+
+function formatReviewCount(count: number | null | undefined): string | null {
+  if (typeof count !== 'number' || Number.isNaN(count)) return null;
+
+  const mod10 = count % 10;
+  const mod100 = count % 100;
+
+  if (mod10 === 1 && mod100 !== 11) return `${count} отзыв`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${count} отзыва`;
+  return `${count} отзывов`;
+}
 
 const platforms = [
   {
     name: 'Яндекс',
     url: business.reviews.yandex.url,
     rating: business.reviews.yandex.rating,
-    icon: 'Y',
-    color: '#FC3F1D'
+    count: business.reviews.yandex.count,
+    logo: withBase('/images/yandex-logo.svg'),
+    logoAlt: 'Логотип Яндекс',
+    logoClass: 'h-6 w-auto'
   },
   {
     name: '2ГИС',
     url: business.reviews.twogis.url,
     rating: business.reviews.twogis.rating,
-    icon: '2',
-    color: '#2BAF2B'
+    count: business.reviews.twogis.count,
+    logo: withBase('/images/2gis-logo.svg'),
+    logoAlt: 'Логотип 2ГИС',
+    logoClass: 'h-7 w-auto'
   },
   {
     name: 'Авито',
     url: business.reviews.avito.url,
     rating: business.reviews.avito.rating,
-    icon: 'A',
-    color: '#00AAFF'
+    count: business.reviews.avito.count,
+    logo: withBase('/images/avito-logo.svg'),
+    logoAlt: 'Логотип Авито',
+    logoClass: 'h-6 w-auto'
   },
 ];
 ---
@@ -34,16 +57,25 @@ const platforms = [
       rel="noopener noreferrer"
       class="card flex items-center gap-4 no-underline cursor-pointer"
     >
-      <div
-        class="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg shrink-0"
-        style={`background-color: ${platform.color}`}
-      >
-        {platform.icon}
+      <div class="w-12 h-12 rounded-xl bg-white border border-[var(--color-border-subtle)] flex items-center justify-center shrink-0 p-2">
+        <img
+          src={platform.logo}
+          alt={platform.logoAlt}
+          class:list={['max-w-full object-contain', platform.logoClass]}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <div>
         <div class="text-sm font-medium text-[var(--color-text-primary)]">Отзывы на {platform.name}</div>
         {platform.rating ? (
-          <div class="text-sm text-[var(--color-accent)]">★ {platform.rating}</div>
+          <>
+            <div class="text-sm text-[var(--color-text-secondary)]">
+              <span class="font-semibold text-[var(--color-text-primary)]">{formatRating(platform.rating)}</span>
+              {platform.count ? ` • ${formatReviewCount(platform.count)}` : ''}
+            </div>
+            <div class="text-xs text-[var(--color-text-tertiary)] mt-1">Смотреть отзывы на площадке</div>
+          </>
         ) : (
           <div class="text-xs text-[var(--color-text-tertiary)]">Перейти к отзывам</div>
         )}
