@@ -16,27 +16,111 @@ const {
   subtitle = 'Ручная обработка и подбор средств под материал пары.',
   steps,
 } = Astro.props;
+
+const midPoint = Math.ceil(steps.length / 2);
+const leftSteps = steps.slice(0, midPoint);
+const rightSteps = steps.slice(midPoint);
 ---
 
 <section class="section bg-[var(--color-bg-base)] border-b border-[var(--color-border-subtle)]" aria-labelledby="cleaning-steps-heading">
   <div class="container">
-    <div class="max-w-2xl mb-10">
-      <h2 id="cleaning-steps-heading" class="text-2xl md:text-3xl font-bold mb-2">{title}</h2>
-      <p class="text-[var(--color-text-secondary)] leading-relaxed">{subtitle}</p>
-    </div>
     <div
-      class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0 -mx-1 px-1"
-      style="scrollbar-width: thin;"
+      class="relative overflow-hidden rounded-[2rem] border border-[var(--color-border-subtle)] px-5 py-6 sm:px-7 md:px-8 md:py-8 lg:px-10 lg:py-10"
+      style="background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--color-accent-cta) 14%, transparent) 0%, transparent 32%),
+        radial-gradient(circle at top right, color-mix(in srgb, var(--color-accent) 10%, transparent) 0%, transparent 28%),
+        linear-gradient(135deg, color-mix(in srgb, var(--color-bg-surface) 94%, white) 0%, color-mix(in srgb, var(--color-bg-elevated) 78%, white) 100%);"
     >
-      {steps.map((step) => (
-        <article
-          class="snap-start shrink-0 w-[min(100%,280px)] md:w-auto card md:min-h-[140px] border-[var(--color-border-subtle)]"
-        >
-          <div class="text-sm font-extrabold text-[var(--color-accent-cta)] mb-2 font-[var(--font-heading)]">{step.num}</div>
-          <h3 class="text-base font-semibold text-[var(--color-text-primary)] mb-1.5">{step.title}</h3>
-          <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{step.desc}</p>
-        </article>
-      ))}
+      <div class="pointer-events-none absolute inset-x-0 top-4 hidden justify-center lg:flex" aria-hidden="true">
+        <span class="font-[var(--font-heading)] text-[clamp(7rem,18vw,13rem)] font-extrabold uppercase tracking-[-0.08em] text-[color:color-mix(in_srgb,var(--color-text-primary)_4%,transparent)]">
+          CLEAN
+        </span>
+      </div>
+
+      <div class="relative z-10 mb-8 flex flex-col gap-4 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-[var(--color-text-tertiary)]">
+            Как проходит химчистка
+          </p>
+          <h2 id="cleaning-steps-heading" class="max-w-3xl text-3xl font-extrabold leading-[0.92] sm:text-4xl lg:text-6xl">
+            {title}
+          </h2>
+        </div>
+        <p class="max-w-md text-sm leading-relaxed text-[var(--color-text-secondary)] sm:text-base">
+          {subtitle}
+        </p>
+      </div>
+
+      <div class="relative z-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.9fr)_minmax(0,1fr)] lg:items-center lg:gap-8">
+        <div class="space-y-3 md:space-y-4">
+          {leftSteps.map((step) => (
+            <article class="rounded-[1.5rem] border border-[var(--color-border-subtle)] bg-[color:color-mix(in_srgb,var(--color-bg-surface)_88%,transparent)] px-4 py-4 shadow-[0_10px_30px_rgba(35,26,27,0.04)] backdrop-blur-sm sm:px-5">
+              <div class="flex items-start gap-4">
+                <div class="shrink-0 font-[var(--font-heading)] text-3xl font-extrabold leading-none tracking-[-0.06em] text-[var(--color-accent-cta)] sm:text-4xl">
+                  {step.num}
+                </div>
+                <div>
+                  <h3 class="mb-1 text-base font-semibold text-[var(--color-text-primary)] sm:text-lg">{step.title}</h3>
+                  <p class="text-sm leading-relaxed text-[var(--color-text-secondary)]">{step.desc}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="order-first mx-auto w-full max-w-[22rem] lg:order-none">
+          <div class="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-[var(--color-border-default)] bg-[var(--color-bg-surface)] p-4 shadow-[0_20px_60px_rgba(35,26,27,0.10)]">
+            <div
+              class="absolute inset-0"
+              style="background:
+                radial-gradient(circle at 30% 22%, color-mix(in srgb, var(--color-accent-cta) 18%, transparent) 0%, transparent 24%),
+                radial-gradient(circle at 75% 78%, color-mix(in srgb, var(--color-accent) 12%, transparent) 0%, transparent 22%),
+                linear-gradient(160deg, color-mix(in srgb, var(--color-bg-elevated) 78%, white) 0%, color-mix(in srgb, var(--color-bg-base) 92%, white) 100%);"
+            ></div>
+            <div class="absolute left-4 top-4 rounded-full border border-[var(--color-border-default)] bg-[color:color-mix(in_srgb,var(--color-bg-surface)_86%,transparent)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-text-tertiary)] backdrop-blur-sm">
+              Placeholder
+            </div>
+            <div class="absolute bottom-4 right-4 rounded-full border border-[var(--color-border-subtle)] bg-[color:color-mix(in_srgb,var(--color-bg-surface)_82%,transparent)] px-3 py-1 text-[11px] font-medium text-[var(--color-text-secondary)] backdrop-blur-sm">
+              Фото обуви добавим позже
+            </div>
+
+            <div class="relative flex h-full items-center justify-center rounded-[1.5rem] border border-dashed border-[var(--color-border-default)]">
+              <div class="flex max-w-[13rem] flex-col items-center text-center">
+                <div class="mb-5 flex h-20 w-20 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[color:color-mix(in_srgb,var(--color-bg-surface)_76%,transparent)] text-[var(--color-accent-cta)] shadow-[0_10px_25px_rgba(101,53,57,0.12)]">
+                  <svg class="h-9 w-9" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                    <path d="M13 28.5C13 24.9 15.9 22 19.5 22H23.8C27.7 22 31.2 20.1 33.3 16.9L35.4 13.8C36.2 12.7 37.9 13.3 37.9 14.7V29.6C37.9 34.8 33.7 39 28.5 39H23.5C17.7 39 13 34.3 13 28.5Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+                    <path d="M16.5 18.5L19.2 15.8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                    <path d="M22.1 13.7H25.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                    <path d="M31.8 10.9L29.6 13.1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="mb-2 font-[var(--font-heading)] text-lg font-bold text-[var(--color-text-primary)]">
+                  Плейсхолдер под визуал
+                </div>
+                <p class="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                  Здесь будет изображение обуви или стилизованная иллюстрация процесса.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3 md:space-y-4">
+          {rightSteps.map((step) => (
+            <article class="rounded-[1.5rem] border border-[var(--color-border-subtle)] bg-[color:color-mix(in_srgb,var(--color-bg-surface)_88%,transparent)] px-4 py-4 shadow-[0_10px_30px_rgba(35,26,27,0.04)] backdrop-blur-sm sm:px-5">
+              <div class="flex items-start gap-4 lg:flex-row-reverse lg:text-right">
+                <div class="shrink-0 font-[var(--font-heading)] text-3xl font-extrabold leading-none tracking-[-0.06em] text-[var(--color-accent)] sm:text-4xl">
+                  {step.num}
+                </div>
+                <div>
+                  <h3 class="mb-1 text-base font-semibold text-[var(--color-text-primary)] sm:text-lg">{step.title}</h3>
+                  <p class="text-sm leading-relaxed text-[var(--color-text-secondary)]">{step.desc}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
