@@ -2,11 +2,9 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PromoStrip from '@components/PromoStrip.astro';
 import HomeHero from '@components/HomeHero.astro';
-import BeforeAfterSplit from '@components/BeforeAfterSplit.astro';
 import ServiceCard from '@components/ServiceCard.astro';
 import CleaningSteps from '@components/CleaningSteps.astro';
 import CaseCard from '@components/CaseCard.astro';
-import BeforeAfterSlider from '@components/BeforeAfterSlider';
 import FAQ from '@components/FAQ.astro';
 import TrustBlock from '@components/TrustBlock.astro';
 import MapSection from '@components/MapSection.astro';
@@ -20,13 +18,6 @@ const faq = [
   { question: 'Есть ли доставка?', answer: 'Да, работаем с доставкой по Санкт-Петербургу. Курьер заберёт изделие и привезёт его обратно после химчистки, реставрации или восстановления. Подробности на странице «Доставка».' },
   { question: 'Какие материалы вы используете?', answer: 'Работаем с профессиональными материалами: краски Saphir, Tarrago, Angelus, клеи и подошвы от проверенных производителей. Подбираем материалы под конкретное изделие.' },
   { question: 'Даёте ли гарантию?', answer: 'Да, на все виды работ предоставляем гарантию. Срок зависит от типа услуги: от 2 недель на локальные работы до 6 месяцев на замену подошвы и другие сложные восстановительные этапы.' },
-];
-
-const orderSteps = [
-  { num: '01', title: 'Отправьте фото', desc: 'Сфотографируйте пару и отправьте в WhatsApp или Telegram' },
-  { num: '02', title: 'Получите оценку', desc: 'Определим объём работ и сообщим стоимость и сроки' },
-  { num: '03', title: 'Сдайте пару', desc: 'Привезите в мастерскую или закажите доставку по СПб' },
-  { num: '04', title: 'Заберите результат', desc: 'Заберите готовую обувь или получите курьером' },
 ];
 
 const cleaningSteps = [
@@ -47,50 +38,7 @@ const cleaningSteps = [
 
   <HomeHero />
 
-  <BeforeAfterSplit
-    title="Результат в одном кадре"
-    description="Так удобнее сравнивать: одна и та же пара до и после обработки в мастерской."
-    beforeAlt="Кроссовки с загрязнённым верхом и подошвой — до химчистки"
-    afterAlt="Те же кроссовки после комплексной чистки и восстановления белого ранта"
-  />
-
-  <section class="section">
-    <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-8">Услуги</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map((service) => (
-          <ServiceCard
-            slug={service.slug}
-            title={service.title}
-            shortDescription={service.shortDescription}
-            priceFrom={service.priceFrom}
-          />
-        ))}
-      </div>
-      <div class="mt-8 text-center">
-        <a href={withBase('/uslugi/')} class="btn-secondary">Все услуги</a>
-      </div>
-    </div>
-  </section>
-
-  <CleaningSteps steps={cleaningSteps} />
-
-  <section class="section bg-[var(--color-bg-surface)] border-y border-[var(--color-border-subtle)]">
-    <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-10 text-center">Как сделать заказ</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {orderSteps.map((step) => (
-          <div class="text-center">
-            <div class="text-3xl font-extrabold text-[var(--color-accent-cta)] mb-3 font-[var(--font-heading)]">{step.num}</div>
-            <h3 class="text-lg font-semibold mb-2">{step.title}</h3>
-            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{step.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="cases-heading">
+  <section class="section bg-[var(--color-bg-base)] border-y border-[var(--color-border-subtle)]" aria-labelledby="cases-heading">
     <div class="container">
       <div class="flex items-center justify-between mb-8 gap-4">
         <h2 id="cases-heading" class="text-2xl md:text-3xl font-bold">Наши работы</h2>
@@ -101,17 +49,6 @@ const cleaningSteps = [
           Все кейсы →
         </a>
       </div>
-
-      <div class="max-w-3xl mx-auto mb-10">
-        <BeforeAfterSlider
-          client:visible
-          title="Сравнение до и после"
-          description="Ползунок на фото — типичный приём сникер-химчисток: наглядно видно объём работы."
-          beforeAlt="Кроссовки с изношенной подошвой и потёртостями — до восстановления"
-          afterAlt="Кроссовки после замены подошвы и комплексной чистки верха"
-        />
-      </div>
-
       <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 [&>*]:mb-6 [&>*]:break-inside-avoid">
         <CaseCard
           title="Покраска кожаной сумки"
@@ -142,14 +79,35 @@ const cleaningSteps = [
     </div>
   </section>
 
-  <section class="section bg-[var(--color-bg-surface)]">
+  <section class="section bg-[var(--color-bg-surface)] border-b border-[var(--color-border-subtle)]">
+    <div class="container">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8">Услуги</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <ServiceCard
+            slug={service.slug}
+            title={service.title}
+            shortDescription={service.shortDescription}
+            priceFrom={service.priceFrom}
+          />
+        ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href={withBase('/uslugi/')} class="btn-secondary">Все услуги</a>
+      </div>
+    </div>
+  </section>
+
+  <CleaningSteps steps={cleaningSteps} />
+
+  <section class="section bg-[var(--color-bg-surface)] border-b border-[var(--color-border-subtle)]">
     <div class="container">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Отзывы наших клиентов</h2>
       <TrustBlock />
     </div>
   </section>
 
-  <section class="section">
+  <section class="section bg-[var(--color-bg-base)]">
     <div class="container max-w-3xl">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Частые вопросы</h2>
       <FAQ items={faq} />
