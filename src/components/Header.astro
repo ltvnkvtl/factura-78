@@ -50,9 +50,7 @@ const currentPath = Astro.url.pathname;
         </a>
       </div>
 
-      <a href={business.social.vk} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm !py-2 !px-4">
-        Отправить фото
-      </a>
+      <button class="btn-primary text-sm !py-2 !px-4" id="header-cta-messenger" type="button">Отправить фото</button>
 
       <!-- Mobile menu toggle -->
       <button
@@ -115,4 +113,7 @@ const currentPath = Astro.url.pathname;
     });
   }
 
+  document.getElementById('header-cta-messenger')?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('open-messenger-modal'));
+  });
 </script>

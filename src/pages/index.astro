@@ -2,32 +2,22 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PromoStrip from '@components/PromoStrip.astro';
 import HomeHero from '@components/HomeHero.astro';
-import NumbersStrip from '@components/NumbersStrip.astro';
+import TrustStrip from '@components/TrustStrip.astro';
 import ServiceCard from '@components/ServiceCard.astro';
-import ProcessTimeline from '@components/ProcessTimeline.astro';
-import CalculatorCTA from '@components/CalculatorCTA.astro';
-import ReviewsBlock from '@components/ReviewsBlock.astro';
 import FAQ from '@components/FAQ.astro';
+import TrustBlock from '@components/TrustBlock.astro';
 import MapSection from '@components/MapSection.astro';
-import ContactCTA from '@components/ContactCTA.astro';
+import MessengerModal from '@components/MessengerModal';
 import services from '@data/services.json';
+import business from '@data/business.json';
 import { withBase } from '@/utils/basePath';
 
 const faq = [
   { question: 'Как узнать стоимость реставрации или химчистки?', answer: 'Отправьте фото изделия в WhatsApp или Telegram — мы оценим объём работ и сообщим ориентировочную стоимость в течение часа. Также можно воспользоваться онлайн-калькулятором на сайте.' },
   { question: 'Сколько времени занимает восстановление изделия?', answer: 'Срок зависит от объёма работ: химчистка и базовый уход обычно занимают 1–3 дня, комплексная реставрация с покраской или заменой деталей — 3–7 рабочих дней. Сложное восстановление может занять до 14 дней.' },
-  { question: 'Есть ли доставка?', answer: 'Да, работаем с доставкой по Санкт-Петербургу. Курьер заберёт изделие и привезёт его обратно после химчистки, реставрации или восстановления. Подробности на странице «Доставка».' },
-  { question: 'Какие материалы вы используете?', answer: 'Работаем с профессиональными материалами: краски Saphir, Tarrago, Angelus, клеи и подошвы от проверенных производителей. Подбираем материалы под конкретное изделие.' },
-  { question: 'Даёте ли гарантию?', answer: 'Да, на все виды работ предоставляем гарантию. Срок зависит от типа услуги: от 2 недель на локальные работы до 6 месяцев на замену подошвы и другие сложные восстановительные этапы.' },
-];
-
-const cleaningSteps = [
-  { num: '01', title: 'Сухая подготовка', desc: 'Снимаем пыль и поверхностные загрязнения, разбираем шнурки и стельку при необходимости.' },
-  { num: '02', title: 'Подошва и швы', desc: 'Аккуратно очищаем рант, протяжку и швы без повреждения клеевых швов.' },
-  { num: '03', title: 'Химия под материал', desc: 'Подбираем средства и режим под кожу, замшу, нубук, текстиль или комбинированные панели.' },
-  { num: '04', title: 'Пятна и въевшаяся грязь', desc: 'Точечно работаем со сложными загрязнениями, сохраняя цвет и фактуру.' },
-  { num: '05', title: 'Форма и детали', desc: 'Восстанавливаем силуэт, подравниваем ворс замши, убираем заломы на текстиле.' },
-  { num: '06', title: 'Финиш', desc: 'Пропитка или кондиционирование по типу материала, контроль результата перед выдачей.' },
+  { question: 'Есть ли доставка?', answer: 'Да, работаем с доставкой по Санкт-Петербургу.' },
+  { question: 'Какие материалы вы используете?', answer: 'Работаем с профессиональными материалами: краски Saphir, Tarrago, Angelus, клеи и подошвы от проверенных производителей.' },
+  { question: 'Даёте ли гарантию?', answer: 'Да, на все виды работ предоставляем гарантию. Срок зависит от типа услуги: от 2 недель до 6 месяцев.' },
 ];
 ---
 
@@ -37,11 +27,25 @@ const cleaningSteps = [
 >
   <PromoStrip />
   <HomeHero />
-  <NumbersStrip />
+  <TrustStrip />
 
+  <!-- Problem statement -->
+  <section class="section bg-[var(--color-bg-base)]">
+    <div class="container max-w-3xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-4">Узнаёте?</p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6" style="font-family: var(--font-heading);">
+        Любимая вещь пришла в&nbsp;негодность?
+      </h2>
+      <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed">
+        Потёртости, сколы, выцветший цвет, сломанная молния — кажется, что любимым кроссовкам или сумке уже не поможешь. Но мы знаем, что это не так. Каждое изделие проходит индивидуальную оценку.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services -->
   <section class="section bg-[var(--color-bg-surface)] border-b border-[var(--color-border-subtle)]">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-8" style="font-family: var(--font-heading);">Услуги</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-8" style="font-family: var(--font-heading);">Наши услуги</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service) => (
           <ServiceCard slug={service.slug} title={service.title} shortDescription={service.shortDescription} priceFrom={service.priceFrom} />
@@ -53,23 +57,75 @@ const cleaningSteps = [
     </div>
   </section>
 
-  <ProcessTimeline steps={cleaningSteps} />
-  <CalculatorCTA />
-
+  <!-- How we work: 3 steps -->
   <section class="section bg-[var(--color-bg-base)] border-b border-[var(--color-border-subtle)]">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-center" style="font-family: var(--font-heading);">Отзывы клиентов</h2>
-      <ReviewsBlock />
+      <h2 class="text-2xl md:text-3xl font-bold mb-10 text-center" style="font-family: var(--font-heading);">Как мы работаем</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        {[
+          { num: '01', title: 'Отправьте фото', desc: 'Сфотографируйте изделие и отправьте нам в WhatsApp или Telegram. Оценим за час.' },
+          { num: '02', title: 'Согласовываем', desc: 'Подбираем оптимальный способ восстановления, называем точную стоимость и срок.' },
+          { num: '03', title: 'Забираем и доставляем', desc: 'Курьер забирает изделие по СПб, проводим работы и возвращаем результат.' },
+        ].map(step => (
+          <div class="text-center">
+            <div class="text-5xl font-extrabold text-[var(--color-accent-cta)] opacity-20 mb-3 leading-none" style="font-family: var(--font-heading);">{step.num}</div>
+            <h3 class="text-lg font-semibold text-[var(--color-text-primary)] mb-2">{step.title}</h3>
+            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section class="section bg-[var(--color-bg-surface)] border-b border-[var(--color-border-subtle)]" id="calculator">
+    <div class="container">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-10">
+          <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-3">Онлайн-калькулятор</p>
+          <h2 class="text-2xl md:text-3xl font-bold mb-3" style="font-family: var(--font-heading);">Узнайте стоимость за 1 минуту</h2>
+          <p class="text-[var(--color-text-secondary)]">Ответьте на 4 вопроса — получите ориентировочную цену и срок</p>
+        </div>
+        <a href={withBase('/kalkulyator/')} class="btn-primary w-full justify-center text-base">Перейти к калькулятору</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section bg-[var(--color-bg-base)] border-b border-[var(--color-border-subtle)]">
+    <div class="container">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center" style="font-family: var(--font-heading);">Что говорят клиенты</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        {[
+          { text: 'Сдала сумку Guess с потёртостями — вернули как новую. Цвет подобрали точно в тон.', author: 'Анна К.', source: 'Авито' },
+          { text: 'Реставрировали кожаные ботинки — заменили подошву и восстановили цвет. Срок соблюли день в день.', author: 'Михаил Р.', source: 'Яндекс' },
+          { text: 'Отправил фото куртки вечером, утром уже получил оценку. Работу сделали за 4 дня, курьер удобно.', author: 'Дмитрий Л.', source: '2ГИС' },
+        ].map(review => (
+          <blockquote class="card flex flex-col gap-4">
+            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed flex-1">«{review.text}»</p>
+            <footer class="flex items-center justify-between">
+              <cite class="text-sm font-semibold text-[var(--color-text-primary)] not-italic">{review.author}</cite>
+              <span class="text-xs text-[var(--color-text-tertiary)]">{review.source} ★★★★★</span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+      <TrustBlock />
     </div>
   </section>
 
   <section class="section bg-[var(--color-bg-base)]">
     <div class="container max-w-3xl">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-center" style="font-family: var(--font-heading);">Частые вопросы</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center" style="font-family: var(--font-heading);">Частые вопросы</h2>
       <FAQ items={faq} />
     </div>
   </section>
 
   <MapSection />
-  <ContactCTA />
+
+  <MessengerModal
+    client:load
+    whatsappUrl={business.social.whatsapp}
+    telegramUrl={business.social.telegram}
+  />
 </BaseLayout>

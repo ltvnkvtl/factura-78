@@ -2,30 +2,30 @@
 
 @theme {
   /* Typography */
-  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Cabin', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Dark Artisan palette */
-  --color-bg-base: #1A1310;
-  --color-bg-surface: #231B17;
-  --color-bg-elevated: #2E2018;
-  --color-border-default: #C8964A;
-  --color-border-subtle: #3D2B1F;
-  --color-text-primary: #F5EDE4;
-  --color-text-secondary: #C4B09A;
-  --color-text-tertiary: #8A7060;
-  --color-accent: #C8964A;
-  --color-accent-hover: #DBA85C;
-  --color-accent-cta: #A0522D;
-  --color-accent-cta-hover: #B85D32;
-  --color-on-accent: #F5EDE4;
+  /* Transformation palette */
+  --color-bg-base: #FAF6F3;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-elevated: #F0E8DF;
+  --color-border-default: #D4B896;
+  --color-border-subtle: #E8D9C8;
+  --color-text-primary: #231A1B;
+  --color-text-secondary: #514557;
+  --color-text-tertiary: #6E5B58;
+  --color-accent: #8B3A2E;
+  --color-accent-hover: #6F2E24;
+  --color-accent-cta: #8B3A2E;
+  --color-accent-cta-hover: #6F2E24;
+  --color-on-accent: #FAF6F3;
   --color-gold: #C8964A;
   --color-success: #4ade80;
   --color-error: #f87171;
-  --color-info: #C8964A;
-  --color-promo-bg: #2E1A0E;
-  --color-promo-text: #C8964A;
+  --color-info: #8B3A2E;
+  --color-promo-bg: #8B3A2E;
+  --color-promo-text: #FAF6F3;
 
   /* Spacing scale */
   --spacing-section-y: 4rem;
@@ -161,7 +161,7 @@
   .card:hover {
     border-color: var(--color-border-default);
     border-top-color: var(--color-gold);
-    box-shadow: 0 4px 32px rgba(200, 150, 74, 0.12);
+    box-shadow: 0 4px 32px rgba(139, 58, 46, 0.12);
   }
 
   .section {
