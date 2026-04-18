@@ -2,45 +2,47 @@
 
 @theme {
   /* Typography */
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Cabin', system-ui, sans-serif;
+  --font-heading: 'Libre Bodoni', Georgia, serif;
+  --font-subheading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Public Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Transformation palette */
-  --color-bg-base: #FAF6F3;
-  --color-bg-surface: #FFFFFF;
-  --color-bg-elevated: #F0E8DF;
-  --color-border-default: #D4B896;
-  --color-border-subtle: #E8D9C8;
-  --color-text-primary: #231A1B;
-  --color-text-secondary: #514557;
-  --color-text-tertiary: #6E5B58;
-  --color-accent: #8B3A2E;
-  --color-accent-hover: #6F2E24;
-  --color-accent-cta: #8B3A2E;
-  --color-accent-cta-hover: #6F2E24;
-  --color-on-accent: #FAF6F3;
-  --color-gold: #C8964A;
-  --color-success: #4ade80;
-  --color-error: #f87171;
-  --color-info: #8B3A2E;
-  --color-promo-bg: #8B3A2E;
-  --color-promo-text: #FAF6F3;
+  /* Heritage Editorial palette */
+  --color-bg-base: #FFFFFF;
+  --color-bg-surface: #FAF8F5;
+  --color-bg-elevated: #F0EBE3;
+  --color-border-default: #D4C4B0;
+  --color-border-subtle: #E8E0D8;
+  --color-text-primary: #1A1007;
+  --color-text-secondary: #4A3728;
+  --color-text-tertiary: #8C7B6B;
+  --color-accent: #B8432F;
+  --color-accent-hover: #9A3626;
+  --color-accent-cta: #B8432F;
+  --color-accent-cta-hover: #9A3626;
+  --color-accent-secondary: #2D4A35;
+  --color-on-accent: #FFFFFF;
+  --color-neutral: #E8E0D8;
+  --color-success: #2D4A35;
+  --color-error: #B8432F;
+  --color-info: #4A3728;
+  --color-promo-bg: #1A1007;
+  --color-promo-text: #FAF8F5;
 
   /* Spacing scale */
-  --spacing-section-y: 4rem;
+  --spacing-section-y: 5rem;
   --spacing-section-y-lg: 6rem;
 
-  /* Radius */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  /* Radius — flat/editorial */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
 }
 
 @media (min-width: 1024px) {
   @theme {
-    --spacing-section-y: 6rem;
+    --spacing-section-y: 5rem;
     --spacing-section-y-lg: 8rem;
   }
 }
@@ -52,18 +54,6 @@
     color: var(--color-text-primary);
     scroll-behavior: smooth;
     background-color: var(--color-bg-base);
-    position: relative;
-  }
-
-  html::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -81,9 +71,9 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-text-primary);
-    line-height: 1.2;
+    line-height: 1.1;
   }
 
   a {
@@ -103,7 +93,7 @@
     padding: 0.75rem 1.5rem;
     background-color: var(--color-accent-cta);
     color: var(--color-on-accent);
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-weight: 600;
     font-size: 1rem;
     border-radius: var(--radius-md);
@@ -131,7 +121,7 @@
     padding: 0.75rem 1.5rem;
     background-color: transparent;
     color: var(--color-text-primary);
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-weight: 600;
     font-size: 1rem;
     border: 1px solid var(--color-border-default);
@@ -151,17 +141,16 @@
   }
 
   .card {
-    background-color: var(--color-bg-surface);
-    border: 1px solid var(--color-border-subtle);
-    border-top: 2px solid var(--color-gold);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    transition: border-color 200ms ease-out, box-shadow 200ms ease-out;
+    background-color: var(--color-bg-base);
+    border: none;
+    border-top: 1px solid var(--color-border-subtle);
+    border-radius: 0;
+    padding: 1.5rem 0;
+    transition: border-color 200ms ease-out;
   }
   .card:hover {
-    border-color: var(--color-border-default);
-    border-top-color: var(--color-gold);
-    box-shadow: 0 4px 32px rgba(139, 58, 46, 0.12);
+    border-color: var(--color-accent);
+    box-shadow: none;
   }
 
   .section {
@@ -187,5 +176,19 @@
       padding-left: 2rem;
       padding-right: 2rem;
     }
+  }
+
+  .photo-bw {
+    filter: grayscale(100%);
+    transition: filter 400ms ease-out;
+  }
+  .group:hover .photo-bw {
+    filter: grayscale(0%);
+  }
+
+  .font-subheading {
+    font-family: var(--font-subheading);
+    font-weight: 500;
+    font-style: italic;
   }
 }

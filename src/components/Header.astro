@@ -14,10 +14,10 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-base)]/95 backdrop-blur-sm">
-  <div class="container flex items-center justify-between h-16 md:h-18">
+<header class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-base)]">
+  <div class="container flex items-center justify-between h-14">
     <a href={withBase('/')} class="flex items-center gap-2 no-underline group">
-      <span class="text-xl md:text-2xl font-bold text-[var(--color-text-primary)] font-[var(--font-heading)] tracking-tight group-hover:text-[var(--color-accent)] transition-colors duration-200">
+      <span class="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors duration-200" style="font-family: var(--font-heading); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.02em;">
         Фактура<span class="text-[var(--color-accent)]"> / </span>78
       </span>
     </a>
@@ -28,7 +28,7 @@ const currentPath = Astro.url.pathname;
         <a
           href={item.href}
           class:list={[
-            'text-sm font-medium no-underline transition-colors duration-200',
+            'text-[11px] uppercase tracking-[0.2em] font-semibold no-underline transition-colors duration-200',
             isActivePath(currentPath, item.path)
               ? 'text-[var(--color-accent)]'
               : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
@@ -50,7 +50,7 @@ const currentPath = Astro.url.pathname;
         </a>
       </div>
 
-      <button class="btn-primary text-sm !py-2 !px-4" id="header-cta-messenger" type="button">Отправить фото</button>
+      <a href={`tel:${business.phone.replace(/\D/g, '') ? '+' + business.phone.replace(/\D/g, '') : '#'}`} class="hidden md:block text-sm font-medium text-[var(--color-text-primary)] no-underline hover:text-[var(--color-accent)] transition-colors duration-200">{business.phone}</a>
 
       <!-- Mobile menu toggle -->
       <button
@@ -113,7 +113,4 @@ const currentPath = Astro.url.pathname;
     });
   }
 
-  document.getElementById('header-cta-messenger')?.addEventListener('click', () => {
-    document.dispatchEvent(new CustomEvent('open-messenger-modal'));
-  });
 </script>
