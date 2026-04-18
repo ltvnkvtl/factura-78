@@ -2,11 +2,12 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PromoStrip from '@components/PromoStrip.astro';
 import HomeHero from '@components/HomeHero.astro';
+import NumbersStrip from '@components/NumbersStrip.astro';
 import ServiceCard from '@components/ServiceCard.astro';
-import CleaningSteps from '@components/CleaningSteps.astro';
-import CaseCard from '@components/CaseCard.astro';
+import ProcessTimeline from '@components/ProcessTimeline.astro';
+import CalculatorCTA from '@components/CalculatorCTA.astro';
+import ReviewsBlock from '@components/ReviewsBlock.astro';
 import FAQ from '@components/FAQ.astro';
-import TrustBlock from '@components/TrustBlock.astro';
 import MapSection from '@components/MapSection.astro';
 import ContactCTA from '@components/ContactCTA.astro';
 import services from '@data/services.json';
@@ -35,61 +36,15 @@ const cleaningSteps = [
   description="Реставрация, чистка, покраска и восстановление кроссовок, обуви, кожаных курток, кожаных и текстильных сумок в Санкт-Петербурге. Оценка по фото за час, доставка по СПб."
 >
   <PromoStrip />
-
   <HomeHero />
-
-  <section class="section bg-[var(--color-bg-base)] border-y border-[var(--color-border-subtle)]" aria-labelledby="cases-heading">
-    <div class="container">
-      <div class="flex items-center justify-between mb-8 gap-4">
-        <h2 id="cases-heading" class="text-2xl md:text-3xl font-bold">Наши работы</h2>
-        <a
-          href={withBase('/kejsy/')}
-          class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline transition-colors duration-200 shrink-0"
-        >
-          Все кейсы →
-        </a>
-      </div>
-      <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 [&>*]:mb-6 [&>*]:break-inside-avoid">
-        <CaseCard
-          title="Покраска кожаной сумки"
-          category="Реставрация сумок"
-          description="Восстановление цвета и покраска потёртой кожаной сумки в оригинальный тон"
-          beforeAlt="Кожаная сумка с потёртостями — до покраски"
-          afterAlt="Кожаная сумка после профессиональной покраски"
-          image={withBase('/images/before-after/bag.png')}
-        />
-        <CaseCard
-          title="Замена молнии на куртке"
-          category="Реставрация курток"
-          description="Восстановление кожаной куртки с установкой новой качественной молнии YKK"
-          beforeAlt="Кожаная куртка со сломанной молнией — до реставрации"
-          afterAlt="Кожаная куртка с новой молнией YKK"
-          image={withBase('/images/before-after/jacket.png')}
-        />
-        <CaseCard
-          class="object-contain"
-          title="Реставрация замшевой обуви"
-          category="Реставрация обуви"
-          description="Глубокая чистка и реставрация замшевых мокасин"
-          beforeAlt="Замшевые мокасины до реставрации"
-          afterAlt="Замшевые мокасины после реставрации"
-          image={withBase('/images/before-after/shoes.png')}
-        />
-      </div>
-    </div>
-  </section>
+  <NumbersStrip />
 
   <section class="section bg-[var(--color-bg-surface)] border-b border-[var(--color-border-subtle)]">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-8">Услуги</h2>
+      <h2 class="text-2xl md:text-3xl font-semibold mb-8" style="font-family: var(--font-heading);">Услуги</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service) => (
-          <ServiceCard
-            slug={service.slug}
-            title={service.title}
-            shortDescription={service.shortDescription}
-            priceFrom={service.priceFrom}
-          />
+          <ServiceCard slug={service.slug} title={service.title} shortDescription={service.shortDescription} priceFrom={service.priceFrom} />
         ))}
       </div>
       <div class="mt-8 text-center">
@@ -98,23 +53,23 @@ const cleaningSteps = [
     </div>
   </section>
 
-  <CleaningSteps steps={cleaningSteps} />
+  <ProcessTimeline steps={cleaningSteps} />
+  <CalculatorCTA />
 
-  <section class="section bg-[var(--color-bg-surface)] border-b border-[var(--color-border-subtle)]">
+  <section class="section bg-[var(--color-bg-base)] border-b border-[var(--color-border-subtle)]">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Отзывы наших клиентов</h2>
-      <TrustBlock />
+      <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-center" style="font-family: var(--font-heading);">Отзывы клиентов</h2>
+      <ReviewsBlock />
     </div>
   </section>
 
   <section class="section bg-[var(--color-bg-base)]">
     <div class="container max-w-3xl">
-      <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Частые вопросы</h2>
+      <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-center" style="font-family: var(--font-heading);">Частые вопросы</h2>
       <FAQ items={faq} />
     </div>
   </section>
 
   <MapSection />
-
   <ContactCTA />
 </BaseLayout>

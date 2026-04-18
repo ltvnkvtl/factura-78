@@ -1,46 +1,45 @@
 ---
 import business from '@data/business.json';
 import { withBase } from '@/utils/basePath';
+import BeforeAfterSlider from '@components/BeforeAfterSlider';
 ---
 
-<section class="section relative overflow-hidden bg-[var(--color-bg-base)]" aria-labelledby="hero-heading">
-  <div
-    class="pointer-events-none absolute inset-0 opacity-[0.12]"
-    style="background-image: radial-gradient(circle at 20% 20%, var(--color-accent-cta), transparent 45%), radial-gradient(circle at 80% 10%, var(--color-accent), transparent 40%);"
-    aria-hidden="true"
-  />
-  <div class="container relative">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-      <div>
-        <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-3">Санкт-Петербург</p>
-        <h1 id="hero-heading" class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
-          Реставрация и химчистка обуви, сумок и кожаных изделий в&nbsp;<span class="text-[var(--color-accent)]">Санкт-Петербурге</span>
-        </h1>
-        <p class="text-lg text-[var(--color-text-secondary)] mb-8 leading-relaxed max-w-xl">
-          Реставрация, чистка, покраска и восстановление кроссовок, обуви, кожаных курток, кожаных и текстильных сумок в Санкт-Петербурге. Оценка по фото за час, доставка по СПб.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href={business.social.vk} target="_blank" rel="noopener noreferrer" class="btn-primary text-base">
-            Отправить фото
-          </a>
-          <a href={withBase('/kalkulyator/')} class="btn-secondary text-base">
-            Рассчитать стоимость
-          </a>
-        </div>
+<section class="relative min-h-[92vh] overflow-hidden bg-[var(--color-bg-base)] flex items-center" aria-labelledby="hero-heading">
+  <!-- Edge vignette -->
+  <div class="pointer-events-none absolute inset-0 z-10" style="background: radial-gradient(ellipse at center, transparent 40%, rgba(26,19,16,0.9) 100%);" aria-hidden="true" />
+
+  <div class="container relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center py-24 lg:py-32">
+
+    <!-- LEFT: Before/After slider -->
+    <div class="relative order-2 lg:order-1">
+      <div class="aspect-[4/3] rounded-xl overflow-hidden border border-[var(--color-border-subtle)] shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+        <BeforeAfterSlider
+          beforeSrc={withBase('/images/before-after/bag.png')}
+          afterSrc={withBase('/images/before-after/shoes.png')}
+          beforeAlt="Изделие до реставрации"
+          afterAlt="Изделие после реставрации"
+          client:load
+        />
       </div>
-      <div class="relative">
-        <div
-          class="aspect-[4/3] rounded-xl overflow-hidden shadow-xl"
-          role="img"
-          aria-label="Мастер мастерской Фактура / 78"
-        >
-          <img
-            src={withBase('/images/master.jpg')}
-            alt="Мастер мастерской Фактура / 78"
-            class="w-full h-full object-cover"
-            loading="eager"
-          />
-        </div>
+      <!-- Floating badge -->
+      <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg-surface)] border border-[var(--color-gold)] rounded-lg px-4 py-2.5 shadow-lg z-10" style="--color-gold: #C8964A;">
+        <p class="text-xs text-[var(--color-text-tertiary)]">результат работы</p>
+        <p class="text-sm font-semibold" style="color: #C8964A; font-family: var(--font-heading);">Фактура / 78</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: Text + CTAs -->
+    <div class="order-1 lg:order-2">
+      <p class="text-xs font-semibold uppercase tracking-[0.3em] mb-5" style="color: #C8964A;">Санкт-Петербург · Мастерская</p>
+      <h1 id="hero-heading" class="mb-6" style="font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; line-height: 1.05; color: var(--color-text-primary);">
+        Возвращаем жизнь <em class="not-italic" style="color: #C8964A;">коже</em><br/>и характер <em class="not-italic" style="color: #C8964A;">вещам</em>
+      </h1>
+      <p class="text-base md:text-lg mb-8 leading-relaxed max-w-lg" style="color: var(--color-text-secondary);">
+        Реставрация, покраска и химчистка обуви, сумок и кожаных изделий. Оценка по фото за час.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href={business.social.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary text-base">Отправить фото</a>
+        <a href={withBase('/kalkulyator/')} class="btn-secondary text-base">Рассчитать стоимость</a>
       </div>
     </div>
   </div>

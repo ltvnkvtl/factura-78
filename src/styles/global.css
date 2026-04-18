@@ -2,29 +2,30 @@
 
 @theme {
   /* Typography */
-  --font-heading: 'Manrope', system-ui, sans-serif;
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Cabin', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Тёплая нейтральная палитра */
-  --color-bg-base: #F2F2F2;
-  --color-bg-surface: #ffffff;
-  --color-bg-elevated: #e8e3df;
-  --color-border-default: #B8A296;
-  --color-border-subtle: #ddd5cf;
-  --color-text-primary: #231A1B;
-  --color-text-secondary: #514557;
-  --color-text-tertiary: #6E5B58;
-  --color-accent: #514557;
-  --color-accent-hover: #3d3342;
-  --color-accent-cta: #653539;
-  --color-accent-cta-hover: #4f2a2c;
-  --color-on-accent: #F2F2F2;
-  --color-success: #16a34a;
-  --color-error: #dc2626;
-  --color-info: #514557;
-  --color-promo-bg: #653539;
-  --color-promo-text: #F2F2F2;
+  /* Dark Artisan palette */
+  --color-bg-base: #1A1310;
+  --color-bg-surface: #231B17;
+  --color-bg-elevated: #2E2018;
+  --color-border-default: #C8964A;
+  --color-border-subtle: #3D2B1F;
+  --color-text-primary: #F5EDE4;
+  --color-text-secondary: #C4B09A;
+  --color-text-tertiary: #8A7060;
+  --color-accent: #C8964A;
+  --color-accent-hover: #DBA85C;
+  --color-accent-cta: #A0522D;
+  --color-accent-cta-hover: #B85D32;
+  --color-on-accent: #F5EDE4;
+  --color-gold: #C8964A;
+  --color-success: #4ade80;
+  --color-error: #f87171;
+  --color-info: #C8964A;
+  --color-promo-bg: #2E1A0E;
+  --color-promo-text: #C8964A;
 
   /* Spacing scale */
   --spacing-section-y: 4rem;
@@ -45,47 +46,29 @@
 }
 
 
-@keyframes page-bg-shimmer {
-  0% {
-    background-position: 0% 0%, 100% 30%, 40% 100%;
-  }
-  100% {
-    background-position: 100% 25%, 0% 55%, 60% 85%;
-  }
-}
-
 @layer base {
   html {
     font-family: var(--font-body);
     color: var(--color-text-primary);
     scroll-behavior: smooth;
     background-color: var(--color-bg-base);
-    background-image:
-      radial-gradient(
-        ellipse 95% 75% at 12% -5%,
-        color-mix(in srgb, var(--color-accent) 14%, transparent) 0%,
-        transparent 58%
-      ),
-      radial-gradient(
-        ellipse 80% 55% at 92% 15%,
-        color-mix(in srgb, var(--color-accent) 9%, transparent) 0%,
-        transparent 52%
-      ),
-      radial-gradient(
-        ellipse 70% 45% at 48% 105%,
-        color-mix(in srgb, var(--color-text-primary) 5%, transparent) 0%,
-        transparent 48%
-      );
-    background-size: 145% 145%, 155% 155%, 125% 125%;
-    background-repeat: no-repeat;
-    animation: page-bg-shimmer 26s ease-in-out infinite alternate;
+    position: relative;
+  }
+
+  html::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
-      animation: none;
-      background-position: 0% 0%, 100% 20%, 50% 100%;
     }
     *,
     *::before,
@@ -98,7 +81,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 600;
     color: var(--color-text-primary);
     line-height: 1.2;
   }
@@ -170,13 +153,15 @@
   .card {
     background-color: var(--color-bg-surface);
     border: 1px solid var(--color-border-subtle);
+    border-top: 2px solid var(--color-gold);
     border-radius: var(--radius-lg);
     padding: 1.5rem;
     transition: border-color 200ms ease-out, box-shadow 200ms ease-out;
   }
   .card:hover {
     border-color: var(--color-border-default);
-    box-shadow: 0 4px 24px rgba(101, 53, 57, 0.12);
+    border-top-color: var(--color-gold);
+    box-shadow: 0 4px 32px rgba(200, 150, 74, 0.12);
   }
 
   .section {

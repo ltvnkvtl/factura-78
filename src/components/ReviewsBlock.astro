@@ -1,0 +1,23 @@
+---
+interface Review { text: string; author: string; platform: string; }
+interface Props { reviews?: Review[]; }
+const { reviews = [
+  { text: 'Сдала кожаную сумку в ужасном состоянии — ручки стёрлись, уголки разошлись. Вернули как новую, цвет подобрали идеально.', author: 'Наталья К.', platform: 'Авито' },
+  { text: 'Реставрировали замшевые ботинки — вывели пятна, восстановили цвет, пришили подошву. Срок выдержали день в день.', author: 'Алексей М.', platform: 'Яндекс' },
+  { text: 'Привезла куртку с трещинами и выцветшими плечами. После работы мастера — как из магазина. Очень довольна.', author: 'Светлана Д.', platform: '2ГИС' },
+]} = Astro.props;
+---
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {reviews.map(review => (
+    <blockquote class="card flex flex-col gap-4">
+      <div class="flex gap-0.5" aria-label="Оценка 5 из 5">
+        {[1,2,3,4,5].map(() => <span style="color: #C8964A;" aria-hidden="true">★</span>)}
+      </div>
+      <p class="text-sm leading-relaxed flex-1" style="color: var(--color-text-secondary);">«{review.text}»</p>
+      <footer class="flex items-center justify-between text-xs mt-auto">
+        <cite class="font-semibold not-italic" style="color: var(--color-text-primary);">{review.author}</cite>
+        <span style="color: var(--color-text-tertiary);">{review.platform}</span>
+      </footer>
+    </blockquote>
+  ))}
+</div>

@@ -1,0 +1,26 @@
+---
+interface TimelineStep { num: string; title: string; desc: string; }
+interface Props { steps: TimelineStep[]; title?: string; }
+const { steps, title = 'Как мы работаем' } = Astro.props;
+---
+<section class="section bg-[var(--color-bg-base)] border-b border-[var(--color-border-subtle)]" aria-labelledby="process-heading">
+  <div class="container">
+    <h2 id="process-heading" class="text-3xl md:text-4xl font-semibold mb-12 text-center" style="font-family: var(--font-heading);">{title}</h2>
+    <div class="overflow-x-auto pb-4 -mx-4 px-4 md:overflow-visible md:mx-0 md:px-0">
+      <div class="flex gap-0 min-w-max md:min-w-0 md:grid md:grid-cols-6">
+        {steps.map((step, i) => (
+          <div class="relative flex flex-col items-center text-center w-44 md:w-auto px-2">
+            {i > 0 && (
+              <div class="absolute top-[22px] right-1/2 w-full h-px bg-gradient-to-r from-[var(--color-border-subtle)] to-transparent" aria-hidden="true" />
+            )}
+            <div class="relative z-10 w-11 h-11 rounded-full border-2 bg-[var(--color-bg-surface)] flex items-center justify-center mb-4 shrink-0" style="border-color: #C8964A;">
+              <span class="text-sm font-semibold" style={`color: #C8964A; font-family: var(--font-heading);`}>{step.num}</span>
+            </div>
+            <h3 class="text-sm font-semibold mb-1 leading-snug" style="color: var(--color-text-primary);">{step.title}</h3>
+            <p class="text-xs leading-relaxed hidden md:block" style="color: var(--color-text-secondary);">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

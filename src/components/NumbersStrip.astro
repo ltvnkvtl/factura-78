@@ -1,0 +1,22 @@
+---
+interface Props {
+  items?: { value: string; label: string }[];
+}
+const { items = [
+  { value: '640', label: 'отзывов на Авито' },
+  { value: '5 лет', label: 'на рынке' },
+  { value: '3000+', label: 'выполненных работ' },
+]} = Astro.props;
+---
+<section class="border-y border-[var(--color-border-subtle)] bg-[var(--color-bg-surface)]" aria-label="Наши достижения">
+  <div class="container">
+    <div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border-subtle)]">
+      {items.map(item => (
+        <div class="flex flex-col items-center justify-center text-center py-8 px-6">
+          <span class="text-4xl md:text-5xl font-semibold mb-2" style={`color: #C8964A; font-family: var(--font-heading);`}>{item.value}</span>
+          <span class="text-sm uppercase tracking-wider" style="color: var(--color-text-secondary);">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
