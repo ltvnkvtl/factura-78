@@ -8,6 +8,7 @@
 
 **Project:** Factura 78
 **Generated:** 2026-04-12 15:42:31
+**Updated:** 2026-04-26
 **Category:** E-commerce Luxury
 
 ---
@@ -16,29 +17,41 @@
 
 ### Color Palette
 
+| Role              | Hex       | CSS Variable                  |
+| ----------------- | --------- | ----------------------------- |
+| Background base   | `#F2F2F2` | `--color-bg-base`             |
+| Background surface| `#ffffff`  | `--color-bg-surface`          |
+| Background elevated| `#e8e3df`| `--color-bg-elevated`         |
+| Border default    | `#B8A296` | `--color-border-default`      |
+| Border subtle     | `#ddd5cf` | `--color-border-subtle`       |
+| Text primary      | `#231A1B` | `--color-text-primary`        |
+| Text secondary    | `#514557` | `--color-text-secondary`      |
+| Text tertiary     | `#6E5B58` | `--color-text-tertiary`       |
+| Accent (links)    | `#514557` | `--color-accent`              |
+| Accent hover      | `#3d3342` | `--color-accent-hover`        |
+| CTA (buttons)     | `#653539` | `--color-accent-cta`          |
+| CTA hover         | `#4f2a2c` | `--color-accent-cta-hover`    |
+| On accent (text)  | `#F2F2F2` | `--color-on-accent`           |
+| Promo background  | `#653539` | `--color-promo-bg`            |
+| Promo text        | `#F2F2F2` | `--color-promo-text`          |
+| Success           | `#16a34a` | `--color-success`             |
+| Error             | `#dc2626` | `--color-error`               |
+| Info              | `#514557` | `--color-info`                |
 
-| Role       | Hex       | CSS Variable         |
-| ---------- | --------- | -------------------- |
-| Primary    | `#7C2D12` | `--color-primary`    |
-| Secondary  | `#B91C1C` | `--color-secondary`  |
-| CTA/Accent | `#CA8A04` | `--color-cta`        |
-| Background | `#FEF2F2` | `--color-background` |
-| Text       | `#450A0A` | `--color-text`       |
-
-
-**Color Notes:** Deep burgundy + craft gold
+**Color Notes:** Единственная тема. Тёплая нейтральная палитра — бежевый, пыльный фиолетовый, бургундский. Без тёмной темы и переключателя.
 
 ### Typography
 
-- **Heading Font:** Amatic SC
-- **Body Font:** Cabin
-- **Mood:** indie, craft, handmade, artisan, organic, creative
-- **Google Fonts:** [Amatic SC + Cabin](https://fonts.google.com/share?selection.family=Amatic+SC:wght@400;700|Cabin:wght@400;500;600;700)
+- **Heading Font:** Manrope (`--font-heading`) — weight 700
+- **Body Font:** Cabin (`--font-body`) — weight 400–700
+- **Mono Font:** JetBrains Mono (`--font-mono`)
+- **Mood:** warm, craft, premium artisan, refined neutral
+- **Google Fonts:** [Manrope + Cabin](https://fonts.google.com/share?selection.family=Manrope:wght@400;500;600;700;800|Cabin:wght@400;500;600;700)
 
 **CSS Import:**
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cabin:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cabin:wght@400;500;600;700&display=swap');
 ```
 
 ### Spacing Variables
@@ -75,30 +88,41 @@
 ```css
 /* Primary Button */
 .btn-primary {
-  background: #CA8A04;
-  color: white;
+  background: var(--color-accent-cta);   /* #653539 */
+  color: var(--color-on-accent);          /* #F2F2F2 */
   padding: 12px 24px;
   border-radius: 8px;
+  font-family: var(--font-heading);
   font-weight: 600;
-  transition: all 200ms ease;
+  transition: background-color 200ms ease-out, transform 150ms ease-out;
   cursor: pointer;
+  border: none;
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  background: var(--color-accent-cta-hover);  /* #4f2a2c */
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
 }
 
 /* Secondary Button */
 .btn-secondary {
   background: transparent;
-  color: #7C2D12;
-  border: 2px solid #7C2D12;
+  color: var(--color-text-primary);       /* #231A1B */
+  border: 1px solid var(--color-border-default);  /* #B8A296 */
   padding: 12px 24px;
   border-radius: 8px;
+  font-family: var(--font-heading);
   font-weight: 600;
-  transition: all 200ms ease;
+  transition: all 200ms ease-out;
   cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--color-bg-elevated);
+  border-color: var(--color-accent);      /* #514557 */
 }
 ```
 
@@ -106,17 +130,16 @@
 
 ```css
 .card {
-  background: #FEF2F2;
+  background: var(--color-bg-surface);    /* #ffffff */
+  border: 1px solid var(--color-border-subtle);  /* #ddd5cf */
   border-radius: 12px;
   padding: 24px;
-  box-shadow: var(--shadow-md);
-  transition: all 200ms ease;
-  cursor: pointer;
+  transition: border-color 200ms ease-out, box-shadow 200ms ease-out;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  border-color: var(--color-border-default);  /* #B8A296 */
+  box-shadow: 0 4px 24px rgba(101, 53, 57, 0.12);
 }
 ```
 
@@ -125,16 +148,18 @@
 ```css
 .input {
   padding: 12px 16px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid var(--color-border-default);  /* #B8A296 */
   border-radius: 8px;
   font-size: 16px;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
   transition: border-color 200ms ease;
 }
 
 .input:focus {
-  border-color: #7C2D12;
+  border-color: var(--color-accent);      /* #514557 */
   outline: none;
-  box-shadow: 0 0 0 3px #7C2D1220;
+  box-shadow: 0 0 0 3px rgba(81, 69, 87, 0.15);
 }
 ```
 
@@ -142,15 +167,15 @@
 
 ```css
 .modal-overlay {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(35, 26, 27, 0.5);
   backdrop-filter: blur(4px);
 }
 
 .modal {
-  background: white;
+  background: var(--color-bg-surface);
   border-radius: 16px;
   padding: 32px;
-  box-shadow: var(--shadow-xl);
+  box-shadow: 0 20px 25px rgba(101, 53, 57, 0.15);
   max-width: 500px;
   width: 90%;
 }
