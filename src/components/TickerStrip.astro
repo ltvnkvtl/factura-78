@@ -1,0 +1,34 @@
+---
+interface Props {
+  items?: string[];
+}
+const { items = ['ОБУВЬ', 'СУМКИ', 'КУРТКИ', 'КОЖА', 'РЕСТАВРАЦИЯ'] } = Astro.props;
+const repeated = [...items, ...items, ...items, ...items];
+---
+<div class="overflow-hidden border-y border-[var(--color-border-subtle)] bg-[var(--color-bg-surface)] py-3" aria-hidden="true">
+  <div class="ticker-track flex whitespace-nowrap">
+    {repeated.map((item) => (
+      <>
+        <span class="inline-block px-6 text-xs font-semibold uppercase tracking-[0.35em] text-[var(--color-text-tertiary)]">{item}</span>
+        <span class="w-1 h-1 rounded-full bg-[var(--color-accent)] inline-block shrink-0 self-center"></span>
+      </>
+    ))}
+  </div>
+</div>
+
+<style>
+  .ticker-track {
+    animation: ticker 22s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
