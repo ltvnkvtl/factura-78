@@ -1,6 +1,7 @@
 ---
-import business from '@data/business.json';
 import { withBase } from '@/utils/basePath';
+import BeforeAfterSlider from '@components/BeforeAfterSlider';
+import business from '@data/business.json';
 ---
 
 <section class="section relative overflow-hidden bg-[var(--color-bg-base)]" aria-labelledby="hero-heading">
@@ -11,37 +12,54 @@ import { withBase } from '@/utils/basePath';
   />
   <div class="container relative">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-      <div>
-        <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-3">Санкт-Петербург</p>
-        <h1 id="hero-heading" class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
-          Реставрация и химчистка обуви, сумок и кожаных изделий в&nbsp;<span class="text-[var(--color-accent)]">Санкт-Петербурге</span>
-        </h1>
-        <p class="text-lg text-[var(--color-text-secondary)] mb-8 leading-relaxed max-w-xl">
-          Реставрация, чистка, покраска и восстановление кроссовок, обуви, кожаных курток, кожаных и текстильных сумок в Санкт-Петербурге. Оценка по фото за час, доставка по СПб.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href={business.social.vk} target="_blank" rel="noopener noreferrer" class="btn-primary text-base">
-            Отправить фото
-          </a>
-          <a href={withBase('/kalkulyator/')} class="btn-secondary text-base">
-            Рассчитать стоимость
-          </a>
-        </div>
-      </div>
-      <div class="relative">
-        <div
-          class="aspect-[4/3] rounded-xl overflow-hidden shadow-xl"
-          role="img"
-          aria-label="Мастер мастерской Фактура / 78"
-        >
-          <img
-            src={withBase('/images/master.jpg')}
-            alt="Мастер мастерской Фактура / 78"
-            class="w-full h-full object-cover"
-            loading="eager"
+
+      <!-- LEFT: Before/After slider -->
+      <div class="relative order-2 lg:order-1">
+        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-[var(--color-border-subtle)] shadow-[0_20px_60px_rgba(0,0,0,0.18)]">
+          <BeforeAfterSlider
+            beforeSrc={withBase('/images/before-after/bag.png')}
+            afterSrc={withBase('/images/before-after/shoes.png')}
+            beforeAlt="Изделие до реставрации"
+            afterAlt="Изделие после реставрации"
+            client:load
           />
         </div>
+        <div class="absolute -bottom-4 -right-4 bg-[var(--color-bg-surface)] border border-[var(--color-border-default)] rounded-lg px-4 py-2.5 shadow-md z-10">
+          <p class="text-xs text-[var(--color-text-tertiary)]">результат работы</p>
+          <p class="text-sm font-semibold text-[var(--color-accent-cta)]" style="font-family: var(--font-heading);">Фактура / 78</p>
+        </div>
       </div>
+
+      <!-- RIGHT: Text + CTAs -->
+      <div class="order-1 lg:order-2 flex flex-col justify-center">
+        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-accent)] mb-5">Санкт-Петербург · с 2019 года</p>
+        <h1 id="hero-heading" class="mb-6" style="font-family: var(--font-heading); font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 800; line-height: 1.05; color: var(--color-text-primary);">
+          Возвращаем жизнь любимым вещам
+        </h1>
+        <p class="text-base md:text-lg text-[var(--color-text-secondary)] mb-6 leading-relaxed max-w-md">
+          Реставрация обуви, кожаных сумок и курток в Санкт-Петербурге. Оценка по фото за час — доставка по городу.
+        </p>
+
+        <a href={business.reviews.avito.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 mb-8 w-fit group">
+          <span class="text-4xl font-extrabold text-[var(--color-accent-cta)] leading-none group-hover:opacity-80 transition-opacity" style="font-family: var(--font-heading);">{business.reviews.avito.count}</span>
+          <div>
+            <p class="text-sm leading-none mb-0.5 text-[var(--color-accent)]">★★★★★</p>
+            <p class="text-xs text-[var(--color-text-tertiary)] group-hover:underline">отзывов на Авито</p>
+          </div>
+        </a>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button class="btn-primary text-base" id="hero-cta-messenger" type="button">Отправить фото</button>
+          <a href={withBase('/kalkulyator/')} class="btn-secondary text-base">Рассчитать стоимость</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<script>
+  document.getElementById('hero-cta-messenger')?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('open-messenger-modal'));
+  });
+</script>

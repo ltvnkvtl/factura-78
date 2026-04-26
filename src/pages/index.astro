@@ -9,7 +9,9 @@ import FAQ from '@components/FAQ.astro';
 import TrustBlock from '@components/TrustBlock.astro';
 import MapSection from '@components/MapSection.astro';
 import ContactCTA from '@components/ContactCTA.astro';
+import MessengerModal from '@components/MessengerModal';
 import services from '@data/services.json';
+import business from '@data/business.json';
 import { withBase } from '@/utils/basePath';
 
 const faq = [
@@ -117,4 +119,10 @@ const cleaningSteps = [
   <MapSection />
 
   <ContactCTA />
+
+  <MessengerModal
+    client:load
+    whatsappUrl={business.social.whatsapp}
+    telegramUrl={business.social.telegram}
+  />
 </BaseLayout>
