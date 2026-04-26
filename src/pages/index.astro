@@ -11,6 +11,7 @@ import TrustBlock from '@components/TrustBlock.astro';
 import MapSection from '@components/MapSection.astro';
 import ContactCTA from '@components/ContactCTA.astro';
 import MessengerModal from '@components/MessengerModal';
+import CalculatorSection from '@components/CalculatorSection';
 import services from '@data/services.json';
 import business from '@data/business.json';
 import { withBase } from '@/utils/basePath';
@@ -41,6 +42,8 @@ const cleaningSteps = [
 
   <HomeHero />
   <TickerStrip />
+
+  <CalculatorSection client:load />
 
   <section class="section bg-[var(--color-bg-base)] border-y border-[var(--color-border-subtle)]" aria-labelledby="cases-heading">
     <div class="container">
