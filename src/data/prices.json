@@ -36,7 +36,8 @@
     "types": ["Обувь (кожа)", "Обувь (замша)", "Обувь (текстиль)", "Сумка (кожа)", "Сумка (текстиль)"],
     "works": {
       "deep": { "label": "Глубокая чистка", "min": 2000, "max": 4000, "days_min": 3, "days_max": 7 },
-      "stain_removal": { "label": "Удаление пятен", "min": 800, "max": 2000, "days_min": 2, "days_max": 5 },
+      "stain_removal": { "label": "Удаление пятен (кровь, масло)", "min": 800, "max": 2000, "days_min": 2, "days_max": 5 },
+      "acid_removal": { "label": "Удаление реагентов", "min": 1000, "max": 1000, "days_min": 2, "days_max": 5 },
       "protection": { "label": "Пропитка", "min": 500, "max": 500, "days_min": 1, "days_max": 2 },
       "painting": { "label": "Покраска подошвы", "min": 2000, "max": 2000, "days_min": 3, "days_max": 7 }
     }
