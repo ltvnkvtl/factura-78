@@ -225,7 +225,7 @@ export default function QuizCalculator() {
               Ориентировочная стоимость
             </p>
             <p style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-accent-cta)', fontFamily: 'var(--font-heading)', marginBottom: '0.5rem' }}>
-              {result.priceMin.toLocaleString('ru-RU')} – {result.priceMax.toLocaleString('ru-RU')} ₽
+              от {result.priceMin.toLocaleString('ru-RU')} ₽
             </p>
             <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
               Срок: {result.daysMin}–{result.daysMax} рабочих дней
