@@ -27,6 +27,7 @@ jobs:
       - run: npm run build
         env:
           ASTRO_GITHUB_PAGES: 'true'
+          PUBLIC_LEAD_FORM_URL: 'https://factura78-lead.factura78.workers.dev'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
