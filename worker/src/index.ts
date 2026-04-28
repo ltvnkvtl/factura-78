@@ -7,6 +7,7 @@ export interface Env {
 const DEFAULT_ALLOWED = [
   'https://factura78.ru',
   'https://www.factura78.ru',
+  'https://ltvnkvtl.github.io',
   'http://localhost:4321',
   'http://localhost:4322',
 ];
