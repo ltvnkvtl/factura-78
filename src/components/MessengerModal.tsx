@@ -6,7 +6,7 @@ interface Props {
   buttonLabel?: string;
 }
 
-export default function MessengerModal({ whatsappUrl, telegramUrl, buttonLabel = 'Отправить фото' }: Props) {
+export default function MessengerModal({ whatsappUrl, telegramUrl, buttonLabel = 'Оценка по фото' }: Props) {
   const [open, setOpen] = useState(false);
   const firstBtnRef = useRef<HTMLAnchorElement>(null);
 
@@ -29,7 +29,15 @@ export default function MessengerModal({ whatsappUrl, telegramUrl, buttonLabel =
     <>
       {/* Sticky floating button */}
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          const section = document.getElementById('contact-cta');
+          if (section) {
+            const top = section.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top, behavior: 'smooth' });
+          } else {
+            setOpen(true);
+          }
+        }}
         style={{ position: 'fixed', bottom: '1.5rem', right: '1.5rem', zIndex: 90, display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.25rem', background: 'var(--color-accent-cta)', color: 'var(--color-on-accent)', fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: '0.9375rem', borderRadius: 'var(--radius-md)', border: 'none', cursor: 'pointer', boxShadow: '0 4px 20px rgba(139,58,46,0.4)', transition: 'background-color 200ms ease-out' }}
         aria-label={buttonLabel}
       >

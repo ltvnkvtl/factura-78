@@ -50,9 +50,9 @@ const currentPath = Astro.url.pathname;
         </a>
       </div>
 
-      <a href={business.social.vk} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm !py-2 !px-4">
-        Отправить фото
-      </a>
+      <button id="header-cta-photo" type="button" class="btn-primary text-sm !py-2 !px-4">
+        Оценка по фото
+      </button>
 
       <!-- Mobile menu toggle -->
       <button
@@ -115,4 +115,15 @@ const currentPath = Astro.url.pathname;
     });
   }
 
+  // Photo CTA — scroll to form section or navigate to home page
+  document.getElementById('header-cta-photo')?.addEventListener('click', () => {
+    const section = document.getElementById('contact-cta');
+    if (section) {
+      const offset = 80;
+      const top = section.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    } else {
+      window.location.href = (import.meta.env.BASE_URL || '/') + '#contact-cta';
+    }
+  });
 </script>

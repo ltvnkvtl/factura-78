@@ -1,0 +1,11 @@
+name = "factura78-lead"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+# Secrets (set via `wrangler secret put`):
+#   BOT_TOKEN — Telegram bot token from @BotFather
+#   CHAT_ID   — destination chat id (master's personal chat or group)
+#
+# Optional override for allowed origins (comma-separated):
+# [vars]
+# ALLOWED_ORIGINS = "https://factura78.ru,https://www.factura78.ru"

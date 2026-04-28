@@ -37,7 +37,7 @@ Components and pages import these directly. Changing a price or adding a service
 ### Components
 
 - **Astro components** (`src/components/*.astro`) — server-rendered, no client JS. Used for layout, navigation, static cards.
-- **Preact components** (`src/components/*.tsx`) — client-side interactive. Currently `QuizCalculator.tsx` and `BeforeAfterSlider.tsx`. Must be hydrated via Astro's `client:*` directives (e.g., `client:load`).
+- **Preact components** (`src/components/*.tsx`) — client-side interactive. Currently `QuizCalculator.tsx`, `BeforeAfterSlider.tsx`, `LeadForm.tsx`, `MessengerModal.tsx`. Must be hydrated via Astro's `client:*` directives (e.g., `client:load`).
 
 ### Styling
 
@@ -46,3 +46,7 @@ Global theme is in `src/styles/global.css` using CSS custom properties. Dark the
 ### GitHub Pages Config
 
 `astro.config.mjs` reads the `ASTRO_GITHUB_PAGES` env var to conditionally set `base` and `site`. The CI workflow sets this automatically. Locally the variable is not set, so paths work without a prefix.
+
+### Lead Form Backend
+
+The site has a lead form (`LeadForm.tsx`) that accepts photos and submits to a Cloudflare Worker which forwards to a Telegram bot. The Worker lives in `worker/` (separate package, deployed independently via `wrangler deploy`). The site reads the Worker URL from the `PUBLIC_LEAD_FORM_URL` env var (`.env`); see `worker/README.md` for setup.

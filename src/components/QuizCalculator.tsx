@@ -2,6 +2,14 @@ import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import pricesData from '../data/prices.json';
 import business from '../data/business.json';
+import LeadForm from './LeadForm';
+
+const CATEGORY_TO_LABEL: Record<string, string> = {
+  shoes: 'Реставрация обуви',
+  bags: 'Реставрация сумок',
+  jackets: 'Реставрация курток',
+  cleaning: 'Химчистка',
+};
 
 type Category = 'shoes' | 'bags' | 'jackets' | 'cleaning';
 
@@ -23,7 +31,6 @@ const CONDITIONS: StepOption[] = [
   { value: 'heavy', label: 'Серьёзные повреждения' },
 ];
 
-const TELEGRAM_URL = 'https://t.me/factura78';
 export default function QuizCalculator() {
   const [step, setStep] = useState(0);
   const [category, setCategory] = useState<Category | null>(null);
@@ -110,6 +117,7 @@ export default function QuizCalculator() {
 
   const result = step === 4 ? calculate() : null;
   const totalSteps = 4;
+  const itemTypeLabel = category ? CATEGORY_TO_LABEL[category] : undefined;
 
   return (
     <div style={{ maxWidth: '640px', margin: '0 auto' }}>
@@ -235,17 +243,21 @@ export default function QuizCalculator() {
             Точная стоимость определяется после осмотра или по фото
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <a
-              href={business.social.vk}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => {
+                const section = document.getElementById('contact-cta');
+                if (section) {
+                  const top = section.getBoundingClientRect().top + window.scrollY - 80;
+                  window.scrollTo({ top, behavior: 'smooth' });
+                }
+              }}
               class="btn-primary"
               style={{ justifyContent: 'center', width: '100%' }}
             >
-              Отправить фото для точной оценки
-            </a>
+              Оценка по фото
+            </button>
             <a
-              href={TELEGRAM_URL}
+              href={business.social.telegram}
               target="_blank"
               rel="noopener noreferrer"
               class="btn-secondary"
@@ -268,6 +280,26 @@ export default function QuizCalculator() {
               Рассчитать заново
             </button>
           </div>
+        </div>
+      )}
+
+      {/* Step 5: Lead form */}
+      {step === 5 && (
+        <div>
+          <button
+            onClick={() => setStep(4)}
+            class="btn-secondary"
+            style={{ fontSize: '0.875rem', marginBottom: '1rem' }}
+          >
+            ← К расчёту
+          </button>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>
+            Прикрепите фото для точной оценки
+          </h2>
+          <p style={{ fontSize: '0.875rem', color: 'var(--color-text-tertiary)', marginBottom: '1.25rem' }}>
+            Мастер посмотрит и пришлёт точную цену в течение часа.
+          </p>
+          <LeadForm compact defaultItemType={itemTypeLabel} onSuccess={restart} />
         </div>
       )}
 
